@@ -14,7 +14,7 @@ class CreateProducersTable extends Migration
     public function up()
     {
         Schema::create('producers', function (Blueprint $table) {
-           $table->increments('id');
+            $table->increments('id');
             $table->string('facility_id');
             $table->dateTime('date_of_data');
             $table->dateTime('date_reported');
