@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/user_role_app', 'APIController@UserRoleApp');
-Route::post('/data_sync_app', 'APIController@DataSyncFromApp');
+Route::post('/sync_data_app', 'APIController@SyncDataFromApp');

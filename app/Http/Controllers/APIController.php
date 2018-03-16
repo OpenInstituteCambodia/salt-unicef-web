@@ -15,9 +15,15 @@ class APIController extends Controller
         return new UserRoleResource($check_result);
     }
 
-    public function DataSyncFromApp(Request $request)
+    public function SyncDataFromApp(Request $request)
     {
-        // Goal to insert data into DB and return inserted status back to mobile app
+        // Goal to insert data into DB
 
+        dd ($request);
+
+
+
+        // API will inserted status back to mobile app in JSON format
+        //return new UserRoleResource($update_status);
     }
 }

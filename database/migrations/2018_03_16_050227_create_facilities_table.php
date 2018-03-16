@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFacilitiesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('facilities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('facility_name');
+            $table->string('Coord_X');
+            $table->string('Coord_Y');
+            $table->string('Latitude');
+            $table->string('Longitude');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('facilities');
+    }
+}

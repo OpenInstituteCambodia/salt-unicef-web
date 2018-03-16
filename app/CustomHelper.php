@@ -86,7 +86,7 @@ class CustomHelper {
         }
     }
 
-    public static function data_sync_app()
+    public static function sync_data_app()
     {
 
     }
