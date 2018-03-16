@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\CustomHelper;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/user_role_app', 'APIController@UserRoleApp');
+Route::post('/data_sync_app', 'APIController@DataSyncFromApp');
