@@ -12,8 +12,9 @@ localhost/api/user_role_app?email=ac@a.com&pwd=0123
 3. {"data":{"message":"Incorrect password"}}
 
 
-# API for Data synchronization
+# URL (local) API for Data synchronization
 localhost/api/sync_data_app
+
 # Sample of Post Json data to server for Synchronization
 [
 	{
