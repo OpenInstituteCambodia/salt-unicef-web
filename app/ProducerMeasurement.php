@@ -4,13 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class ProducerMeasurement extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'roles';
-
+    protected $table = 'producer_measurements';
+//    protected $hidden = [
+//        '',
+//    ];
 }

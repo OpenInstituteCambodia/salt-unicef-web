@@ -16,29 +16,37 @@ class APIController extends Controller
         return new UserRoleResource($check_result);
     }
 
+    /**
+     * @param Request $request // is the json post data
+     * @return \Illuminate\Support\Collection
+     * Logic
+     * Foreach of json element
+     *  If the data of the json array are successfully inserted then commit those data into DB
+     *      @return {code=200, message='ok'}
+     *  Else rollback all the inserted data @return {code=500, message=error_message}
+     * End foreach
+     */
+    /**
+     * Example of json data
+        [
+            {
+                "producers" : [
+                    {"measurement_1":"20","measurement_2":"30"},
+                    {"measurement_1":"10","measurement_2":"20"}
+                ]
+            },
+            {
+                "monitors" : [
+                    {"measurement":"20","warning" :"0"},
+                    {"measurement":"10","warning" :"1"}
+                ]
+            }
+        ]
+        $request->toArray() // Converting JSON to Array
+     */
+
     public function SyncDataFromApp(Request $request)
     {
-        /**
-         * Example of json data
-            [
-                {
-                    "producers" : [
-                            {"measurement_1":"20","measurement_2":"30"},
-                            {"measurement_1":"10","measurement_2":"20"}
-                    ]
-                },
-                {
-                    "monitors" : [
-                            {"measurement":"20","warning" :"0"},
-                            {"measurement":"10","warning" :"1"}
-                    ]
-                }
-            ]
-
-         * $request->toArray() // Converting JSON to Array
-
-         */
-
         DB::beginTransaction();
         try{
             foreach ($request->toArray() as $key1 => $val1)
@@ -59,15 +67,7 @@ class APIController extends Controller
                 'message'=> "Ok"
             ]);
         }
-//        catch (ValidationException $e)
-//        {
-//            DB::rollBack();
-//            return collect([
-//                'message'=> $e->getMessage(),
-//            ]);
-//        }
         catch (\Illuminate\Database\QueryException $e) {
-            // something went wrong with the transaction, rollback
             DB::rollBack();
             return collect([
                 'code' => '500',

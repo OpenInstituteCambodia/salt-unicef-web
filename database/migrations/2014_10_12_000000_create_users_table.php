@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->integer('role')->comment('1:Admin,2:Producer,3:Monitor');
+            $table->integer('facility_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
