@@ -4,7 +4,6 @@ namespace App;
 
 use App\User;
 use App\ProducerMeasurement;
-use App\User_Role;
 use Illuminate\Support\Facades\Hash;
 
 class CustomHelper {
