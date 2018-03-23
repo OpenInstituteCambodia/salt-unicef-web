@@ -17,5 +17,17 @@ class FacilitiesTableSeeder extends Seeder
             'Latitude' => '11.582855',
             'Longitude' => '104.833521',
         ]);
+        DB::table('facilities')->insert([
+            'facility_ref_id' => 'F_002',
+            'facility_name' => 'Village Salt Facility',
+            'Latitude' => '11.582855',
+            'Longitude' => '104.833521',
+        ]);
+        DB::table('facilities')->insert([
+            'facility_ref_id' => 'F_003',
+            'facility_name' => 'Kompot Salt Facility',
+            'Latitude' => '11.582855',
+            'Longitude' => '104.833521',
+        ]);
     }
 }
