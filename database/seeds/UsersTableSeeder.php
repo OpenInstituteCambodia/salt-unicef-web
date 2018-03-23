@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'producer@a.com',
             'password' => bcrypt('123'),
             'role' => '2',
+            'facility_id' => '1',
         ]);
         DB::table('users')->insert([
             'name' => 'monitor',

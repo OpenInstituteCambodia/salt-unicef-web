@@ -18,15 +18,15 @@ localhost/api/sync_data_app
 # Sample of Post Json data to server for Synchronization
 [
 	{
-		"producers" : [
-					{"facility_id":"1","measurement_1":"20","measurement_2":"30"},
-					{"facility_id":"1","measurement_1":"10","measurement_2":"20"}
+		"producer_measurements" : [
+					{"facility_id":"1","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"20","measurement_2":"30"},
+					{"facility_id":"1","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"10","measurement_2":"20"}
 			]
 	},
 	{
-		"monitors" : [
-					{"producer_id":"2","measurement":"20","warning" :"0"},
-					{"producer_id":"2","measurement":"10","warning" :"1"}
+		"monitor_measurements" : [
+					{"facility_id":"2","measurement":"20","warning" :"0"},
+					{"facility_id":"2","measurement":"10","warning" :"1"}
 			]
 	}
 ]

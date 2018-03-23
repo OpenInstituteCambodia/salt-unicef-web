@@ -15,12 +15,14 @@ class CreateFacilitiesTable extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('facility_ref_id');
             $table->string('facility_name');
             $table->string('Latitude');
             $table->string('Longitude');
             //$table->integer('type')->comment('1:factory,2:community');
             //$table->integer('community_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

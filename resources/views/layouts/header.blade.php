@@ -4,10 +4,10 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="{{ route('login') }}">
         <!-- Logo icon -->
-        <b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>
+        <b><img src="logo.png" alt="" class="dark-logo" /></b>
         <!--End Logo icon -->
         <!-- Logo text -->
-        <span></span>
+        <span>{{__('allstr.salt')}}</span>
       </a>
     </div>
     <!-- End Logo -->
@@ -35,9 +35,6 @@
           <div class="dropdown-menu dropdown-menu-right animated zoomIn">
             <ul class="dropdown-user">
               <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-              <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-              <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-              <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
               <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
             </ul>
           </div>

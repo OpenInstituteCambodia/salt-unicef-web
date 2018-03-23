@@ -60,9 +60,11 @@ class CustomHelper {
             // Return true if it is matched
             if(Hash::check($pwd, $user->password)== true)
             {
+                $facility = Facilities::where('id', "=", $user->facility_id)->first();
                 return collect([
                     'message'=> 'Ok',
                     'user'=> $user,
+                    'facility'=> $facility,
                 ]);
             }
             else
