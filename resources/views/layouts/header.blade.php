@@ -11,6 +11,7 @@
       </a>
     </div>
     <!-- End Logo -->
+
     <div class="navbar-collapse">
       <!-- toggle and nav items -->
       <ul class="navbar-nav mr-auto mt-md-0">
@@ -25,7 +26,8 @@
           </a>
         </li>
       </ul>
-      <!-- User profile and search -->
+
+      <!-- User profile -->
       <ul class="navbar-nav my-lg-0">
         <!-- Profile -->
         <li class="nav-item dropdown">

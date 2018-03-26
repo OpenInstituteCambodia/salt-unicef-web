@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CustomHelper;
 use App\Http\Resources\UserRoleResource;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class APIController extends Controller
 {
@@ -47,39 +48,51 @@ class APIController extends Controller
 
     public function SyncDataFromApp(Request $request)
     {
+        //info($request->toArray());
+        //info($request->getContentType());
         DB::beginTransaction();
-        try{
-            foreach ($request->toArray() as $key1 => $val1)
-            {
-                // dd($key1) =0, dd($val1) = array of elements
-                foreach ($val1 as $key2 => $val2)
+        if($request->getContentType() == 'json')
+        {
+            try{
+                foreach ($request->toArray() as $key1 => $val1)
                 {
-                    // dd($key2)="producers" [table_name]; dd($val2) get array of table_inserted value
-                    foreach ($val2 as $data)
+                    // dd($key1) =0, dd($val1) = array of elements
+                    foreach ($val1 as $key2 => $val2)
                     {
+                        // dd($key2)="producers" [table_name]; dd($val2) get array of table_inserted value
+                        foreach ($val2 as $data)
+                        {
                             DB::table($key2)->insert($data);
+                        }
                     }
                 }
+                DB::commit();
+                return collect([
+                    'code' => '200',
+                    'message'=> "Ok"
+                ]);
             }
-            DB::commit();
-            return collect([
-                'code' => '200',
-                'message'=> "Ok"
-            ]);
+            catch (\Illuminate\Database\QueryException $e) {
+                DB::rollBack();
+                return collect([
+                    'code' => '500',
+                    'message'=> $e->getMessage(),
+                ]);
+            }
+            catch(\Exception $e)
+            {
+                DB::rollback();
+                return collect([
+                    'code' => '500',
+                    'message'=> $e->getMessage(),
+                ]);
+            }
         }
-        catch (\Illuminate\Database\QueryException $e) {
-            DB::rollBack();
-            return collect([
-                'code' => '500',
-                'message'=> $e->getMessage(),
-            ]);
-        }
-        catch(\Exception $e)
+        else
         {
-            DB::rollback();
             return collect([
                 'code' => '500',
-                'message'=> $e->getMessage(),
+                'message'=> "Receiving data is not JSON format",
             ]);
         }
     }
