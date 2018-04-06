@@ -32,7 +32,7 @@
                         <i class='fa fa-refresh fa-lg' aria-hidden='true'></i>
                         {{trans('allstr.cancel')}}
                     </button>
-                    <button class="btn btn-outline-info pull-right" name="submit_btn" id="submit_btn" style="margin-right: 0.5em;">
+                    <button class="btn btn-outline-info pull-right" name="producer_submit_btn" id="producer_submit_btn" style="margin-right: 0.5em;">
                         <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                         {{ trans('allstr.show_result') }}
                     </button>
@@ -43,15 +43,16 @@
             <hr>
             <table class='table table-striped responsive' id='prod_measurement_tbl' cellspacing='0' width='100%'>
                 <thead>
-                <tr>
-                    <th class='text-center'> {{ trans('allstr.no') }} </th>
-                    <th class='text-center'> {{ trans('allstr.facility_name') }} </th>
-                    <th class='text-center'> {{ trans('allstr.iodized_salt_produced') }} </th>
-                    <th class='text-center'> {{ trans('allstr.potassium_used') }} </th>
-                    <th class='text-center'> {{ trans('allstr.%_of_days_producing_UNICEF_standard') }} </th>
-                    <th class='text-center'> {{ trans('allstr.radio_iodized_salt_produced_over_potassium_used') }} </th>
-                </tr>
+                    <tr>
+                        <th class='text-center'> {{ trans('allstr.no') }} </th>
+                        <th class='text-center'> {{ trans('allstr.facility_name') }} </th>
+                        <th class='text-center'> {{ trans('allstr.iodized_salt_produced') }} </th>
+                        <th class='text-center'> {{ trans('allstr.potassium_used') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_UNICEF_standard') }} </th>
+                        <th class='text-center'> {{ trans('allstr.radio_iodized_salt_produced_over_potassium_used') }} </th>
+                    </tr>
                 </thead>
+                <tbody id="tbody"></tbody>
             </table>
 
         </div><!-- ./class blank-page -->
@@ -83,7 +84,7 @@
                 });
 
                 /* Submit Report */
-                $(document).on('click', '#submit_btn', function() {
+                $(document).on('click', '#producer_submit_btn', function() {
                     var start_date_val = $('#startdatepicker').val();
                     var end_date_val = $('#enddatepicker').val();
                     $('#prod_measurement_tbl').DataTable( {
@@ -96,16 +97,16 @@
                                 dataSrc: 'data'
                             },
                             "columns": [
-                                { "data": "No." },
+                                { "data": "No" },
                                 { "data": "facility_name" },
                                 { "data": "iodized_salt_produced" },
                                 { "data": "potassium_used" },
                                 { "data": "percentage_of_days_producing_per_standard" },
                                 { "data": "radio_iodized_salt_produced_over_potassium_used" }
                             ],
-                            scrollY: '35vh',
+
                             deferRender:    true,
-                            scroller:       true
+                            scroller:       true,
                         } );
 //                    }
                     $("#prod_measurement_tbl").show();

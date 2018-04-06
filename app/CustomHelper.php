@@ -12,33 +12,30 @@ class CustomHelper {
 
 // --------------------------- Report Functions --------------------------------------------
 
-    public static function select_producer_measurement($from_date, $to_date){
+    public static function select_producer_measurement($from_date, $to_date, $number_days){
 
         $producer_measure = <<<EOT
-    select `facilities`.`id` as `faci_id`, `facilities`.`facility_name`,
-    SUM(producer_measurements.quantity_salt_processed) as total_salt_produced,
-    SUM(producer_measurements.quantity_potassium_iodate) as total_potassium_produced
-    from `producer_measurements`
-    inner join `facilities`
-    on `producer_measurements`.`facility_id` = `facilities`.`id`
-    where `producer_measurements`.`date_of_data`
-    between '{$from_date} 00:00:00' and '{$to_date} 23:59:59'
-    group by `faci_id`
+    SELECT `producer_measurements`.`facility_id` AS facil_id, `facilities`.`facility_name`, 
+      SUM(producer_measurements.quantity_salt_processed) as total_salt_produced, 
+      SUM(producer_measurements.quantity_potassium_iodate) as total_potassium_produced, 
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days,
+      concat(round(1/(SUM(producer_measurements.quantity_salt_processed)/SUM(producer_measurements.quantity_potassium_iodate)),1),":1") AS ratio_iodized_over_potassium
+      FROM `producer_measurements` inner join `facilities` on `producer_measurements`.`facility_id` = `facilities`.`id`
+      where `producer_measurements`.`date_of_data` between '{$from_date} 00:00:00' and '{$to_date} 23:59:59'
+      GROUP by facil_id;
 EOT;
-        $producer_measure_query = DB::select($producer_measure);
+// Notice that don't move/tab EOT; otherwise it is error
 
-        return $producer_measure_query;
+         $producer_measure_query = DB::select($producer_measure);
+         return $producer_measure_query;
 
-//        $producer_measure = DB::table('producer_measurements')
-//                            -> select('facilities.facility_name',
-//                                    DB::raw('SUM(producer_measurements.quantity_salt_processed) as total_salt_produced'),
-//                                    DB::raw('SUM(producer_measurements.quantity_potassium_iodate) as total_potassium_produced')
-//                                )
-//                            -> join('facilities', 'producer_measurements.facility_id', '=', 'facilities.id')
-//                            ->whereBetween('producer_measurements.date_of_data', ["'" . $from_date . ' 00:00:00' . "'", "'" . $to_date. ' 23:59:59' . "'"])
-//                            ->groupby('facilities.facility_name')
-//                            ->get();
-//        return $producer_measure;
     }
 
     public static function select_monitor_measurement($from_date, $to_date){
@@ -48,19 +45,14 @@ EOT;
             concat(round(SUM(IF(`monitor_measurements`.`measurement` BETWEEN 16 AND 50, `monitor_measurements`.`measurement`, 0))/COUNT(`monitor_measurements`.`facility_id`),2),'%') AS percentage_samples,
             SUM(IF(`monitor_measurements`.`warning`=1,1,0)) as total_warning
             from `monitor_measurements` inner join `facilities` on `monitor_measurements`.`facility_id` = `facilities`.`id` 
-            where `monitor_measurements`.`date_of_visit` between '2018-03-01 00:00:00' and '2018-04-07 23:59:59' 
-            group by `faci_id`
+            where `monitor_measurements`.`date_of_visit` between '{$from_date} 00:00:00' and '{$to_date} 23:59:59' 
+            group by `faci_id`;
 EOT;
+// Notice that don't move/tab EOT; otherwise it is error
 
-return $monitor_measure;
-
-
-
-
-
+        $monitor_measure_query = DB::select($monitor_measure);
+        return $monitor_measure_query;
     }
-
-    
 
 // --------------------------- Facilities Management Functions --------------------------------------------
 

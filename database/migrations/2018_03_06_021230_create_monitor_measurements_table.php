@@ -15,6 +15,7 @@ class CreateMonitorMeasurementsTable extends Migration
     {
         Schema::create('monitor_measurements', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('monitor_id')->nullable();
             $table->integer('facility_id')->nullable();
             $table->tinyInteger('at_producer_site')->comment('1:Yes;0:No')->default(0);
             $table->string('location')->nullable()->comment("[string] Location of monitoring, if not at producer's site");

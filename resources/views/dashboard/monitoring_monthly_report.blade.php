@@ -31,13 +31,26 @@
                             <i class='fa fa-refresh fa-lg' aria-hidden='true'></i>
                             {{trans('allstr.cancel')}}
                         </button>
-                        <button class="btn btn-outline-info pull-right" name="" id="edit_user_btn" style="margin-right: 0.5em;">
+                        <button class="btn btn-outline-info pull-right" name="monitor_submit_btn" id="monitor_submit_btn" style="margin-right: 0.5em;">
                             <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                             {{ trans('allstr.show_result') }}
                         </button>
                     </div>
                 </div>
-
+                <div class="clearfix"></div>
+                <!-- show report result --->
+                <hr>
+                <table class='table table-striped responsive' id='monitor_measurement_tbl' cellspacing='0' width='100%'>
+                    <thead>
+                    <tr>
+                        <th class='text-center'> {{ trans('allstr.no') }} </th>
+                        <th class='text-center'> {{ trans('allstr.facility_name') }} </th>
+                        <th class='text-center'> {{ trans('allstr.number_of_inspections') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_samples_within_UNICEF_standard') }} </th>
+                        <th class='text-center'> {{ trans('allstr.warning_received') }} </th>
+                    </tr>
+                    </thead>
+                </table>
             </div><!-- ./class blank-page -->
         </div><!-- ./class blank -->
 
@@ -48,7 +61,8 @@
             {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>--}}
             <script>
                 $(function() {
-                    // $('#datepicker').datepicker();
+                    // global csrf token variable
+                    var token = "{{ csrf_token() }}";
 
                     $('#startdatepicker').datepicker({
                         format: 'yyyy-mm-dd',
@@ -65,6 +79,37 @@
                     $(document).on('click', "#btn_cancel", function(){
                         location.reload();
                     });
+
+                    /* Submit Report */
+                    $(document).on('click', '#monitor_submit_btn', function() {
+                        var start_date_val = $('#startdatepicker').val();
+                        console.log('start' + start_date_val);
+                        var end_date_val = $('#enddatepicker').val();
+                        console.log('end' + end_date_val);
+                        $('#monitor_measurement_tbl').DataTable( {
+                            destroy: true,
+                            "ajax": {
+                                type: "POST",
+                                url: "{{ url('/inspectionreport') }}",
+                                data: {_token: token, start_date: start_date_val, end_date: end_date_val},
+                                cache: false,
+                                dataSrc: 'data'
+                            },
+                            "columns": [
+                                { "data": "No" },
+                                { "data": "facility_name" },
+                                { "data": "number_inspection" },
+                                { "data": "percentage_of_samples_per_standard" },
+                                { "data": "total_warning" }
+                            ],
+                            deferRender:    true,
+                            scroller:       true
+                        } );
+//                    }
+                        $("#monitor_measurement_tbl").show();
+                        return false;
+                    });
+
 
                 });
 

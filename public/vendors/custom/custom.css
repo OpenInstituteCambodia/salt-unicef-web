@@ -76,6 +76,14 @@ select {
     -webkit-appearance: none;
 }
 
+/* ------ Datatable -------- */
+
+table.dataTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+}
+
 /* -------- bootstrap 4.0 style ---------------------- */
 
 table {
@@ -97,6 +105,7 @@ th {
 label {
     display: inline-block;
     margin-bottom: .5rem;
+    font-weight: 500;
 }
 
 button {
