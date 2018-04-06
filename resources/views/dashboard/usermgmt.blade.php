@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+    use Illuminate\Support\Facades\Hash;
     <div class="blank">
         <!--To show white background over the gray background-->
         <div class="blank-page">
@@ -102,6 +103,7 @@
                         <label for="email" class="col-md-4">{{ trans('allstr.user_email') }}</label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete='off'>
+                            <div id="msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -216,6 +218,26 @@
                 /* ------ Add/Save new User -----*/
                 $("#div_select_facility").hide();
 
+                $(document).on('keyup', "#email", function(){
+                    var txtEmail = $('#email').val();
+                    // post data to server using ajax
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('/checkexistingemail') }}",
+                        data: {_token: token, email: txtEmail},
+                        cache: false,
+                        success: function(result)
+                        {
+                            $('#msg').html('<span style="color: red;">'+result+"</span>");
+                        },
+                        error: function(e)
+                        {
+                            console.log(e);
+                        }
+                    });
+                    return false;
+                });
+
                 // if role = producer then show facility select option
                 $(document).on('change', "#role_selected", function(){
                 //$("#role_selected").change(function(){
@@ -310,11 +332,31 @@
                     return false;
                 });
 
+                {{--$(document).on('keyup', "#edit_email", function(){--}}
+                    {{--var txtEmail = $('#edit_email').val();--}}
+                    {{--// post data to server using ajax--}}
+                    {{--$.ajax({--}}
+                        {{--type: "POST",--}}
+                        {{--url: "{{ url('/checkexistingemail') }}",--}}
+                        {{--data: {_token: token, email: txtEmail},--}}
+                        {{--cache: false,--}}
+                        {{--success: function(result)--}}
+                        {{--{--}}
+                            {{--$('#msg').html('<span style="color: red;">'+result+"</span>");--}}
+                        {{--},--}}
+                        {{--error: function(e)--}}
+                        {{--{--}}
+                            {{--console.log(e);--}}
+                        {{--}--}}
+                    {{--});--}}
+                    {{--return false;--}}
+                {{--});--}}
+
                 /* Save Edited user data */
                 $(document).on('click', '#save_change_btn', function() {
                     var txtName = $('#edit_name').val();
                     var txtEmail = $('#edit_email').val();
-                    //var txtPassword = $('#password').val();
+                    var txtPassword = $('#edit_password').val();
                     var roleOption = $('#role_selected_edit').val();
                     var txt_id = $('#save_change_btn').attr('name');
                     var facOption = $('#facility_selected_edit').val();
@@ -326,12 +368,12 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ url('/saveuserdata') }}",
-                        //data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
-                        data: {_token: token, name: txtName, email: txtEmail, role: roleOption, facil: facOption, sid:txt_id},
+                        data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
+                        //data: {_token: token, name: txtName, email: txtEmail, role: roleOption, facil: facOption, sid:txt_id},
                         cache: false,
                         success: function(result)
                         {
-                            location.reload();
+                           // location.reload();
                         },
                         error: function(e)
                         {

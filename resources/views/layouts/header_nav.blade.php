@@ -36,7 +36,7 @@
             <img src="{{ URL::asset('vendors/minimalAdmin/images/user_m.png')}}" style="border-radius: 50%;">
           </a>
           <ul class="dropdown-menu " role="menu">
-            <li><a href="profile.html"><i class="fa fa-user fa-lg"></i>Edit Profile</a></li>
+            {{--<li><a href="profile.html"><i class="fa fa-user fa-lg"></i>Edit Profile</a></li>--}}
             <li><a href="{{route('logout')}}"><i class="fa fa-power-off fa-lg"></i> Logout</a></li>
           </ul>
         </li>

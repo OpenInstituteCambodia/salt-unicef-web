@@ -110,10 +110,20 @@ class UserMgmtController extends Controller
 
                         . "<div class='form-group'>"
                             . "<label for='edit_email' class='col-md-4'>"
-                                . trans('allstr.email')
+                                . trans('allstr.user_email')
                             . "</label>"
                             . "<div class='col-md-6'>"
                                 . "<input id='edit_email' type='email' class='form-control' name='edit_email' value='" . $user_info->email . "'>"
+                            . "</div>"
+                        . "</div>"
+                        . "<div class='clearfix'></div>"
+
+                        . "<div class='form-group'>"
+                            . "<label for='edit_password' class='col-md-4'>"
+                                . trans('allstr.user_pwd')
+                            . "</label>"
+                            . "<div class='col-md-6'>"
+                                . "<input id='edit_password' type='password' class='form-control' name='edit_password' value='" . $user_info->password . "'>"
                             . "</div>"
                         . "</div>"
                         . "<div class='clearfix'></div>"
@@ -184,9 +194,23 @@ class UserMgmtController extends Controller
      */
     public function saveEditUserData(Request $request)
     {
-        CustomHelper::update_user($request->name, $request->email, $request->role, $request->facil, $request->sid);
+        CustomHelper::update_user($request->name, $request->email, $request->pwd, $request->role, $request->facil, $request->sid);
         // return view('dashboard/monthlyreport');
         // return view('dashboard/facilitymgmt',['all_facilities' => $fac_result]);
+    }
+
+    public function checkExistingEmail(Request $request)
+    {
+        $existing_email = User::where('email', '=', $request->email)->first();
+        if(!empty($existing_email))
+        {
+            $result = "Email exists!";
+        }
+        else
+        {
+            $result ="";
+        }
+        return $result;
     }
 
 }

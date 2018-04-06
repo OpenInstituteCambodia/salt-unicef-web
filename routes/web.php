@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/userinfo', 'UserMgmtController@displayUserInfoById')->name('userinfo');
     Route::get('/getfacility', 'UserMgmtController@getFacility')->name('getfacility');
     Route::post('/saveuserdata', 'UserMgmtController@saveEditUserData')->name('saveuserdata');
+    Route::post('/checkexistingemail', 'UserMgmtController@checkExistingEmail')->name('checkexistingemail');
+
 
     // --------- Facility Mgmt - Display, Add, Edit & Delete ---------
     Route::get('/facilitymgmt', 'DashboardController@facilityManagement')->name('facilitymgmt');

@@ -138,7 +138,7 @@ EOT;
      */
     public static function user_info_by_ID($user_id)
     {
-        $user_info = User::select('users.id','users.name', 'users.email', 'users.role', 'users.facility_id', 'facilities.facility_name')
+        $user_info = User::select('users.id','users.name', 'users.email', 'users.password', 'users.role', 'users.facility_id', 'facilities.facility_name')
                     -> Leftjoin('facilities', 'users.facility_id', '=', 'facilities.id')
                     -> where('users.id', '=', $user_id)
                     -> first();
@@ -177,11 +177,12 @@ EOT;
      * @param $uID
      * @return mixed
      */
-    public static function update_user($name, $email, $role, $facility_id, $uID)
+    public static function update_user($name, $email, $pwd, $role, $facility_id, $uID)
     {
         $user = User::where('id','=', $uID)->first();
         $user->name = $name;
         $user->email = $email;
+        $user->password = Hash::make($pwd);
         $user->role = $role;
         if($facility_id != 0) $user->facility_id = $facility_id;
         else $user->facility_id=NULL;
