@@ -18,11 +18,11 @@ class CreateMonitorMeasurementsTable extends Migration
             $table->integer('facility_id')->nullable();
             $table->tinyInteger('at_producer_site')->comment('1:Yes;0:No')->default(0);
             $table->string('location')->nullable()->comment("[string] Location of monitoring, if not at producer's site");
-            $table->string('Latitude')->nullable();
-            $table->string('Longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->integer('measurement')->nullable();
             $table->tinyInteger('warning')->nullable()->comment('0:No action;1:Warning given to producer');
-            $table->dateTime('date_of_visit')->nullable()->comment('date of measurement');
+            $table->dateTime('date_of_visit')->comment('date of measurement');
             $table->dateTime('date_of_follow_up')->nullable()->comment('date of follow up visit');
             $table->timestamps();
         });

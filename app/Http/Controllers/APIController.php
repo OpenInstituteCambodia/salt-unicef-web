@@ -48,8 +48,8 @@ class APIController extends Controller
 
     public function SyncDataFromApp(Request $request)
     {
-        //info($request->toArray());
-        //info($request->getContentType());
+        // info($request->toArray());
+        // info($request->getContentType());
         DB::beginTransaction();
         if($request->getContentType() == 'json')
         {

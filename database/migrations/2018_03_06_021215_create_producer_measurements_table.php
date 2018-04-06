@@ -16,8 +16,8 @@ class CreateProducerMeasurementsTable extends Migration
         Schema::create('producer_measurements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('facility_id')->nullable();
-            $table->dateTime('date_of_data')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->dateTime('date_reported')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('date_of_data')->comment('date of measurement');
+            $table->dateTime('date_reported')->default(\DB::raw('CURRENT_TIMESTAMP'))->comment('date of record is inserted)');
             $table->integer('quantity_salt_processed')->comment('Quantity of salt processed in that day (Kg.)');
             $table->integer('quantity_potassium_iodate')->comment('Quantity of potassium iodate used in that day (Kg.)');
             $table->integer('stock_potassium')->comment('Stock of potassium at the end of that day (Kg.)');
