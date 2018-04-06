@@ -19,17 +19,18 @@ localhost/api/sync_data_app
 [
 	{
 		"producer_measurements" : [
-					{"facility_id":"1","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"20","measurement_2":"30"},
-					{"facility_id":"1","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"10","measurement_2":"20"}
+					{"facility_id":"1","date_of_data":"2018-04-05 10:30:31","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"20","measurement_2":"30"},
+					{"facility_id":"1","date_of_data":"2018-04-05 10:30:31","quantity_salt_processed":10,"quantity_potassium_iodate": 11,"stock_potassium":2,"measurement_1":"10","measurement_2":"20"}
 			]
 	},
 	{
 		"monitor_measurements" : [
-					{"facility_id":"2","measurement":"20","warning" :"0"},
-					{"facility_id":"2","measurement":"10","warning" :"1"}
+					{"facility_id":"2","at_producer_site":"1","location":"","latitude":"","longitude":"","measurement":"20","warning" :"0", "date_of_visit":"2018-04-05 10:30:31","date_of_follow_up":""},
+					{"facility_id":"2","at_producer_site":"0","location":"Rousey Keo, PP","latitude":"","longitude":"","measurement":"20","warning" :"0", "date_of_visit":"2018-04-05 10:30:31","date_of_follow_up":""}
 			]
 	}
 ]
+
 
 # Return value
 1. {"code":"200","message":"Ok"}
