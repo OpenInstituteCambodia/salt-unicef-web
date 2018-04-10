@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-    use Illuminate\Support\Facades\Hash;
     <div class="blank">
         <!--To show white background over the gray background-->
         <div class="blank-page">
@@ -283,7 +282,7 @@
                         cache: false,
                         success: function(result)
                         {
-                            location.reload();
+                            //location.reload();
                         },
                         error: function(e)
                         {
@@ -369,7 +368,7 @@
                         type: "POST",
                         url: "{{ url('/saveuserdata') }}",
                         data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
-                        //data: {_token: token, name: txtName, email: txtEmail, role: roleOption, facil: facOption, sid:txt_id},
+                        // data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
                         cache: false,
                         success: function(result)
                         {

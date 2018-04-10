@@ -262,7 +262,7 @@
                     var txtFaciLat = $('#edit_faci_lat').val();
                     var txtFaciLong = $('#edit_faci_long').val();
                     var txt_id = $('#save_faci_btn').attr('name');
-                    alert(txt_id);
+
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",

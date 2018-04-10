@@ -12,9 +12,13 @@ class APIController extends Controller
 {
     public function UserRoleApp(Request $request)
     {
+        // info($request->toArray());
+        // info($request->getContentType());
         $check_result = CustomHelper::user_role_app($request->email, $request->pwd);
-        // Pass data into userRole Resource (API) and the API will return data in JSON format
-        return new UserRoleResource($check_result);
+        return $check_result;
+
+        // == not used ==  Pass data into userRole Resource (API) and the API will return data in JSON format
+        // return new UserRoleResource($check_result);
     }
 
     /**

@@ -8,6 +8,7 @@ use App\CustomHelper;
 use App\User;
 use App\Facility;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Crypt;
 
 class UserMgmtController extends Controller
 {

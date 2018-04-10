@@ -45,6 +45,7 @@
     <div class="clearfix"></div>
 
     <!-- sidebar -->
+    @if(Auth::user()->role==1)
     <div class="navbar-default sidebar" role="navigation" style="text-align: left">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
@@ -81,9 +82,9 @@
               </li>
             </ul>
           </li>
-
         </ul>
       </div>
     </div>
+    @endif
   </div>
 </nav>

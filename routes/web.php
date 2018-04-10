@@ -17,9 +17,10 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+use Illuminate\Support\Facades\Auth;
+
 // ---- Routes require Auth()-login
 Route::group(['middleware' => ['auth']], function(){
-
     // ----- Display in Dashboard --------
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
@@ -31,7 +32,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/getfacility', 'UserMgmtController@getFacility')->name('getfacility');
     Route::post('/saveuserdata', 'UserMgmtController@saveEditUserData')->name('saveuserdata');
     Route::post('/checkexistingemail', 'UserMgmtController@checkExistingEmail')->name('checkexistingemail');
-
 
     // --------- Facility Mgmt - Display, Add, Edit & Delete ---------
     Route::get('/facilitymgmt', 'DashboardController@facilityManagement')->name('facilitymgmt');
@@ -47,9 +47,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/productionreport', 'ReportController@monthlyProductionReport')->name('productionreport');
     Route::post('/inspectionreport', 'ReportController@monthlyMonitoringReport')->name('inspectionreport');
 
-
     // -------- Log out -------
     Route::get('/logout', 'UserMgmtController@logOut')->name('logout');
+
 
 }); // .'middleware' => ['auth']
 
