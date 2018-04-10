@@ -7,6 +7,7 @@ use App\CustomHelper;
 use App\Http\Resources\UserRoleResource;
 use DB;
 use Illuminate\Support\Facades\Log;
+use App\Facility;
 
 class APIController extends Controller
 {
@@ -99,5 +100,13 @@ class APIController extends Controller
                 'message'=> "Receiving data is not JSON format",
             ]);
         }
+    }
+
+    public function ListFacilitiesForApp(){
+        $all_facilities = Facility::select('id','facility_ref_id', 'facility_name')->get();
+        return collect([
+            //'message'=> 'Ok',
+            'facilities'=> $all_facilities,
+        ]);
     }
 }
