@@ -15,6 +15,7 @@ class CreateProducerMeasurementsTable extends Migration
     {
         Schema::create('producer_measurements', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->nullable();
             $table->integer('facility_id')->nullable();
             $table->dateTime('date_of_data')->comment('date of measurement');
             $table->dateTime('date_reported')->default(\DB::raw('CURRENT_TIMESTAMP'))->comment('date of record is inserted)');
