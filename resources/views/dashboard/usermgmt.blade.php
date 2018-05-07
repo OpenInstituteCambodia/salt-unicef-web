@@ -101,7 +101,7 @@
                     <div class="form-group">
                         <label for="email" class="col-md-4">{{ trans('allstr.user_email') }}</label>
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete='off'>
+                            <input id="email" type="email" class="form-control" name="email" value="" required autocomplete='off'>
                             <div id="msg"></div>
                         </div>
                     </div>
@@ -282,7 +282,7 @@
                         cache: false,
                         success: function(result)
                         {
-                            //location.reload();
+                            location.reload();
                         },
                         error: function(e)
                         {
@@ -372,7 +372,7 @@
                         cache: false,
                         success: function(result)
                         {
-                           // location.reload();
+                           location.reload();
                         },
                         error: function(e)
                         {
