@@ -220,6 +220,7 @@
                 /* ------ Add/Save new User -----*/
                 $("#div_select_facility").hide();
 
+                /* Checking Existing Email for add new user form */
                 $(document).on('keyup', "#email", function(){
                     var txtEmail = $('#email').val();
                     // post data to server using ajax
@@ -261,13 +262,14 @@
                     return false;
                 });
 
-                // Cancel to save new user
+                /* Cancel to save new user */
                 $(document).on('click', "#add_new_user_cancel", function(){
                 // $("#add_new_user_cancel").click(function() {
                     location.reload();
 
                 });
-                // validate Email x@x.xxx
+
+                /* validate Email x@x.xxx */
                 function validateEmail(email) {
                     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return re.test(String(email).toLowerCase());
