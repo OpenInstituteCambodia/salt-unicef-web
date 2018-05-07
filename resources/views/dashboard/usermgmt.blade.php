@@ -264,31 +264,49 @@
                     location.reload();
 
                 });
+                // validate Email x@x.xxx
+                function validateEmail(email) {
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(String(email).toLowerCase());
+                }
 
                 /* Save New User */
                 $(document).on('click', "#add_new_user_save", function(){
                 //$("#add_new_user_save").click(function() {
+
                     var txtName = $('#name').val();
                     var txtEmail = $('#email').val();
                     var txtPassword = $('#password').val();
                     var roleOption = $('#role_selected').val();
                     var facOption = $('#facility_selected').val();
 
-                    // post data to server using ajax
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('/addnewuser') }}",
-                        data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption},
-                        cache: false,
-                        success: function(result)
-                        {
-                            location.reload();
-                        },
-                        error: function(e)
-                        {
-                            console.log(e);
-                        }
-                    });
+                    if (validateEmail(txtEmail))
+                    {
+                        // post data to server using ajax
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('/addnewuser') }}",
+                            data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption},
+                            cache: false,
+                            success: function(result)
+                            {
+                                location.reload();
+                            },
+                            error: function(e)
+                            {
+                                console.log(e);
+                            }
+                        });
+                    }
+                    else if(txtEmail =='')
+                    {
+                        $('#msg').html("<span style='color: red;'>Email is required</span>");
+                    }
+                    else
+                    {
+                        $('#msg').html("<span style='color: red;'>Incorrect Email format</span>");
+                    }
+
                     return false;
                 });
                 /* ------ ./Add/Save new User -----*/
