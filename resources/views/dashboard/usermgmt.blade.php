@@ -273,6 +273,8 @@
                     return re.test(String(email).toLowerCase());
                 }
 
+                /* onChange if selected role value !=0 (select option) then removed text "Role is required from
+                 below role select option */
                 $(document).on('change', "#role_selected", function(){
                     var roleOption_selected = $('#role_selected').val();
                     if(roleOption_selected !=0) {
