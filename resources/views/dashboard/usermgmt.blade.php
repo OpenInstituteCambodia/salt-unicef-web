@@ -92,24 +92,26 @@
                 <form>
                 <div class='modal-body'>
                     <div class="form-group">
-                        <label for="name" class="col-md-4">{{ trans('allstr.name') }}</label>
+                        <label for="name" class="col-md-4">{{ trans('allstr.name') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete='off'>
+                            <div id="name_msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="email" class="col-md-4">{{ trans('allstr.user_email') }}</label>
+                        <label for="email" class="col-md-4">{{ trans('allstr.user_email') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="" required autocomplete='off'>
-                            <div id="msg"></div>
+                            <div id="email_msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="password" class="col-md-4">{{ trans('allstr.password') }}</label>
+                        <label for="password" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password" id="pwd" required>
+                            <input id="password" type="password" class="form-control" name="password" id="pwd" autocomplete='off' required>
+                            <div id="pwd_msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -123,7 +125,7 @@
                     {{--<div class="clearfix"></div>--}}
 
                     <div class="form-group">
-                        <label for="role-option" class="col-md-4">{{ trans('allstr.user_role') }}</label>
+                        <label for="role-option" class="col-md-4">{{ trans('allstr.user_role') }} <i class="text-red">*</i></label>
                         <div class="col-md-6 styled-select">
                             <select id="role_selected" autocomplete='off'>
                                 <option value="0" selected>{{ trans('allstr.select_user_option') }}</option>
@@ -131,6 +133,7 @@
                                 <option value="2">{{ trans('allstr.producer') }}</option>
                                 <option value="3">{{ trans('allstr.monitor') }}</option>
                             </select>
+                            <div id="option_msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -227,7 +230,7 @@
                         cache: false,
                         success: function(result)
                         {
-                            $('#msg').html('<span style="color: red;">'+result+"</span>");
+                            $('#email_msg').html('<span style="color: red;">'+result+"</span>");
                         },
                         error: function(e)
                         {
@@ -270,6 +273,14 @@
                     return re.test(String(email).toLowerCase());
                 }
 
+                $(document).on('change', "#role_selected", function(){
+                    var roleOption_selected = $('#role_selected').val();
+                    if(roleOption_selected !=0) {
+                        $('#option_msg').html("");
+                    }
+                });
+
+
                 /* Save New User */
                 $(document).on('click', "#add_new_user_save", function(){
                 //$("#add_new_user_save").click(function() {
@@ -280,7 +291,17 @@
                     var roleOption = $('#role_selected').val();
                     var facOption = $('#facility_selected').val();
 
-                    if (validateEmail(txtEmail))
+                    if(roleOption ==0) {
+                        $('#option_msg').html("<span style='color: red;'>Role is required</span>");
+                    }
+
+                    if(txtName ==''){ $('#name_msg').html("<span style='color: red;'>Name cannot be blank</span>"); }
+                    else { $('#name_msg').html(""); }
+
+                    if(txtPassword ==''){ $('#pwd_msg').html("<span style='color: red;'>Password cannot be blank</span>");}
+                    else { $('#pwd_msg').html(""); }
+
+                    if (validateEmail(txtEmail) && txtName !='' && txtPassword !='' && roleOption !=0)
                     {
                         // post data to server using ajax
                         $.ajax({
@@ -298,13 +319,10 @@
                             }
                         });
                     }
-                    else if(txtEmail =='')
+                    else if(txtEmail =='') $('#email_msg').html("<span style='color: red;'>Email is required</span>");
+                    else if(!validateEmail(txtEmail))
                     {
-                        $('#msg').html("<span style='color: red;'>Email is required</span>");
-                    }
-                    else
-                    {
-                        $('#msg').html("<span style='color: red;'>Incorrect Email format</span>");
+                        $('#email_msg').html("<span style='color: red;'>Incorrect Email format</span>");
                     }
 
                     return false;
