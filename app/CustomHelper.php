@@ -42,7 +42,7 @@ EOT;
         $monitor_measure = <<<EOT
             select `facilities`.`id` as `faci_id`, `facilities`.`facility_name`, 
             COUNT(`monitor_measurements`.`facility_id`) as num_inspections,
-            concat(round(SUM(IF(`monitor_measurements`.`measurement` BETWEEN 16 AND 50, `monitor_measurements`.`measurement`, 0))/COUNT(`monitor_measurements`.`facility_id`),2),'%') AS percentage_samples,
+            concat(round(SUM(IF(`monitor_measurements`.`measurement` BETWEEN 16 AND 50, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` BETWEEN 16 AND 50, 1, 0)),2),'%') AS percentage_samples,
             SUM(IF(`monitor_measurements`.`warning`=1,1,0)) as total_warning
             from `monitor_measurements` inner join `facilities` on `monitor_measurements`.`facility_id` = `facilities`.`id` 
             where `monitor_measurements`.`date_of_visit` between '{$from_date} 00:00:00' and '{$to_date} 23:59:59' 

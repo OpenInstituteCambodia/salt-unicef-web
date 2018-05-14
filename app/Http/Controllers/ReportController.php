@@ -31,6 +31,7 @@ class ReportController extends Controller
                     "facility_name"=>$producer_each_result->facility_name,
                     'iodized_salt_produced'=>$producer_each_result->total_salt_produced,
                     'potassium_used'=>$producer_each_result->total_potassium_produced,
+                    'total_number_days' => $number_of_days,
                     'percentage_of_days_producing_per_standard'=>$producer_each_result->percentage_days,
                     'radio_iodized_salt_produced_over_potassium_used'=>$producer_each_result->ratio_iodized_over_potassium
                 );

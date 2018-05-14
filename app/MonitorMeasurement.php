@@ -12,6 +12,7 @@ class MonitorMeasurement extends Model
      * @var string
      */
     protected $table = 'monitor_measurements';
+    public $timestamps = true;
 //    protected $hidden = [
 //        '',
 //    ];

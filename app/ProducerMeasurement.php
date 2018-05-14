@@ -12,6 +12,7 @@ class ProducerMeasurement extends Model
      * @var string
      */
     protected $table = 'producer_measurements';
+    public $timestamps = true;
 //    protected $hidden = [
 //        '',
 //    ];

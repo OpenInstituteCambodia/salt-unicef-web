@@ -48,6 +48,7 @@
                         <th class='text-center'> {{ trans('allstr.facility_name') }} </th>
                         <th class='text-center'> {{ trans('allstr.iodized_salt_produced') }} </th>
                         <th class='text-center'> {{ trans('allstr.potassium_used') }} </th>
+                        <th class='text-center'> {{ trans('allstr.total_number_days') }} </th>
                         <th class='text-center'> {{ trans('allstr.%_of_days_producing_UNICEF_standard') }} </th>
                         <th class='text-center'> {{ trans('allstr.radio_iodized_salt_produced_over_potassium_used') }} </th>
                     </tr>
@@ -101,6 +102,7 @@
                                 { "data": "facility_name" },
                                 { "data": "iodized_salt_produced" },
                                 { "data": "potassium_used" },
+                                { "data": "total_number_days" },
                                 { "data": "percentage_of_days_producing_per_standard" },
                                 { "data": "radio_iodized_salt_produced_over_potassium_used" }
                             ],

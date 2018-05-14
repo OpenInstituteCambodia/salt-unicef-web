@@ -67,6 +67,8 @@ class APIController extends Controller
                         // dd($key2)="producers" [table_name]; dd($val2) get array of table_inserted value
                         foreach ($val2 as $data)
                         {
+                            $data['created_at']=date('Y-m-d H:i:s');
+                            $data['updated_at']=date('Y-m-d H:i:s');
                             DB::table($key2)->insert($data);
                         }
                     }

@@ -94,9 +94,6 @@ class FacilityMgmtController extends Controller
         return $faci_data;
     }
 
-
-
-
     /**
      * Save Editing Data
      * @param Request $request

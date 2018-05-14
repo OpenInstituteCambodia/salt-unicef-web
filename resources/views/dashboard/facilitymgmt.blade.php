@@ -78,7 +78,7 @@
                 <form>
                     <div class='modal-body'>
                         <div class="form-group">
-                            <label for="faci_ref_id" class="col-md-4">{{ trans('allstr.facility_ref_id') }}</label>
+                            <label for="faci_ref_id" class="col-md-4">{{ trans('allstr.facility_ref_id') }}<i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="faci_ref_id" type="text" class="form-control" name="faci_ref_id" autofocus autocomplete='off'>
                             </div>
@@ -86,7 +86,7 @@
                         <div class="clearfix"></div>
 
                         <div class="form-group">
-                            <label for="faci_name" class="col-md-4">{{ trans('allstr.name') }}</label>
+                            <label for="faci_name" class="col-md-4">{{ trans('allstr.name') }}<i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="faci_name" type="text" class="form-control" name="faci_name" required autocomplete='off'>
                             </div>
