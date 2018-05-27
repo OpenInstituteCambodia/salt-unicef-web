@@ -119,15 +119,15 @@ class UserMgmtController extends Controller
                         . "</div>"
                         . "<div class='clearfix'></div>"
 
-                        . "<div class='form-group'>"
-                            . "<label for='edit_password' class='col-md-4'>"
-                                . trans('allstr.user_pwd')
-                            . "</label>"
-                            . "<div class='col-md-6'>"
-                                . "<input id='edit_password' type='password' class='form-control' name='edit_password' value='" . $user_info->password . "'>"
-                            . "</div>"
-                        . "</div>"
-                        . "<div class='clearfix'></div>"
+//                        . "<div class='form-group'>"
+//                            . "<label for='edit_password' class='col-md-4'>"
+//                                . trans('allstr.user_pwd')
+//                            . "</label>"
+//                            . "<div class='col-md-6'>"
+//                                . "<input id='edit_password' type='password' class='form-control' name='edit_password' value='" . $user_info->password . "'>"
+//                            . "</div>"
+//                        . "</div>"
+//                        . "<div class='clearfix'></div>"
 
                         . "<div class='form-group'>"
                             . "<label for='role_option_edit' class='col-md-4'>"
@@ -195,7 +195,8 @@ class UserMgmtController extends Controller
      */
     public function saveEditUserData(Request $request)
     {
-        CustomHelper::update_user($request->name, $request->email, $request->pwd, $request->role, $request->facil, $request->sid);
+        // CustomHelper::update_user($request->name, $request->email, $request->pwd, $request->role, $request->facil, $request->sid);
+        CustomHelper::update_user($request->name, $request->email, $request->role, $request->facil, $request->sid);
         // return view('dashboard/monthlyreport');
         // return view('dashboard/facilitymgmt',['all_facilities' => $fac_result]);
     }
@@ -212,6 +213,15 @@ class UserMgmtController extends Controller
             $result ="";
         }
         return $result;
+    }
+
+    /**
+     * Save Editing Data
+     * @param Request $request
+     */
+    public function saveResetPassword(Request $request)
+    {
+        CustomHelper::update_user_pwd($request->resetpwd, $request->sid);
     }
 
 }

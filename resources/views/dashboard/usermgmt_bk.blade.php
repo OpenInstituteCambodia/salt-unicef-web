@@ -9,14 +9,13 @@
                         <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
                         {{ trans('allstr.add_user') }}
                     </button>
-                    <hr>
                     <div class="clearfix"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class='table table-striped responsive' id='user_mgmt_tbl' cellspacing='0' width='100%'>
+                        <table class="table responsive" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -27,7 +26,7 @@
                                 <th class="text-center">{{ trans('allstr.action') }}</th>
                             </tr>
                             </thead>
-                            <tbody id="tbody">
+                            <tbody>
                             @if(!empty($all_users))
                                 <?php $i=0; ?>
                                 @foreach ($all_users as $each_user)
@@ -57,11 +56,7 @@
                                                 {{ trans('allstr.edit') }}
                                             </button>
                                             <!-- Reset Password Record Button -->
-                                            {{--<button class="btn btn-outline-info" name="{{ $each_user->id }}" id="reset_pwd_btn">--}}
-                                                {{--<i class="fa fa-cog fa-lg" aria-hidden="true"></i>--}}
-                                                {{--{{ trans('allstr.reset_password') }}--}}
-                                            {{--</button>--}}
-                                            <button class="btn btn-outline-info" data-id="{{ $each_user->id }}" name="{{ $each_user->id }}" id="reset_pwd_btn">
+                                            <button class="btn btn-outline-info" name="{{ $each_user->id }}" id="reset_pwd_btn">
                                                 <i class="fa fa-cog fa-lg" aria-hidden="true"></i>
                                                 {{ trans('allstr.reset_password') }}
                                             </button>
@@ -112,17 +107,17 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="pwd" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
+                        <label for="password" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
-                            <input id="pwd" type="password" class="form-control" name="password" autocomplete='off' required>
+                            <input id="password" type="password" class="form-control" name="password" id="pwd" autocomplete='off' required>
                             <div id="pwd_msg"></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="confirm_pwd" class="col-md-4">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
+                        <label for="password-confirm" class="col-md-4">{{ trans('allstr.password_confirm') }}</label>
                         <div class="col-md-6">
-                            <input id="confirm_pwd" type="password" class="form-control" name="password_confirmation" required>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" id="pwd_confirm" required>
                             <div id="confirm_pwd_msg"></div>
                         </div>
                     </div>
@@ -213,50 +208,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- Reset User Password Modal -->
-    <div class="modal fade" id="modal_reset_pwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="modal-title text-primary"> {{ trans('allstr.reset_password') }} </span>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
-                    </button>
-                </div>
-                <form>
-                    <div class='modal-body' id="modal_reset_body">
-                        <div class="form-group">
-                            <label for="reset_password" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
-                            <div class="col-md-6">
-                                <input id="reset_password" type="password" class="form-control" placeholder="Enter New Password" name="reset_password" autocomplete='off' required>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group">
-                            <label for="reset_password_confirm" class="col-md-4">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
-                            <div class="col-md-6">
-                                <input id="reset_password_confirm" type="password" class="form-control" placeholder="Enter Password Again" name="reset_password_confirm" required>
-                                <div id="reset_password_confirm_msg"></div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <input type="hidden" id="btn_id" value="">
-                    </div><!-- /.modal-body -->
-                    <div class='modal-footer'>
-                        <button class='btn btn-outline-danger' data-dismiss='modal' id="reset_pwd_cancel">
-                            <i class='fa fa-refresh fa-lg' aria-hidden='true'></i>
-                            {{trans('allstr.cancel')}}
-                        </button>
-                        <button class='btn btn-outline-primary' id="reset_pwd_save">
-                            <i class='fa fa-floppy-o fa-lg' aria-hidden='true'></i>
-                            {{ trans('allstr.save')  }}
-                        </button>
-                    </div><!-- /.modal-footer -->
-                </form>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
     @push('script')
         <script src="{!! URL::asset('vendors/custom/custom.js') !!}"></script>
         <script>
@@ -264,93 +215,6 @@
             {
                 // global csrf token variable
                 var token = "{{ csrf_token() }}";
-
-                /* Initial Data table */
-                $('#user_mgmt_tbl').DataTable( {
-                    deferRender:    true,
-                    scroller:       true,
-                } );
-
-                // Add_New_user: Confirm match of password and reset password
-                $( "#confirm_pwd" ).keyup(function() {
-                    var pwd = $('#pwd').val();
-                    var pwd_confirm = $('#confirm_pwd').val();
-                    if(pwd != "")
-                    {
-                        if(pwd_confirm != pwd) $('#confirm_pwd_msg').html('<span style="color: red;">Password mismatched!!</span>');
-                        else $('#confirm_pwd_msg').html('<span style="color: green;">Password mismatched!!</span>');
-                    }
-                });
-
-                // Reset_Password: Confirm match of password and reset password
-                $( "#reset_password_confirm" ).keyup(function() {
-                    var reset_pwd = $('#reset_password').val();
-                    var reset_pwd_confirm = $('#reset_password_confirm').val();
-                    if(reset_pwd != "")
-                    {
-                        if(reset_pwd_confirm != reset_pwd) $('#reset_password_confirm_msg').html('<span style="color: red;">Password mismatched!!</span>');
-                        else $('#reset_password_confirm_msg').html('<span style="color: green;">Password mismatched!!</span>');
-                    }
-                });
-
-                /* Show Reset User Password Modal */
-                $(document).on('click', "#reset_pwd_btn", function(){
-                    var btnid = $(this).data('id');
-                    //console.log('id=' + btnid);
-                    $("#btn_id").val(btnid);
-                    $('#modal_reset_pwd').modal('show');
-                    return false;
-                });
-
-                /* Reset user password data */
-                $(document).on('click', '#reset_pwd_save', function() {
-
-                    var txt_id = $("#btn_id").val();
-                    console.log('id=' + btn_id);
-                    var txtResetPassword = $('#reset_password').val();
-                    // post data to server using ajax
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('/saveresetpassword') }}",
-                        data: {_token: token, resetpwd: txtResetPassword, sid:txt_id},
-                        cache: false,
-                        success: function(result)
-                        {
-                            location.reload();
-                        },
-                        error: function(e)
-                        {
-                            //console.log(e);
-                        }
-                    });
-                    return false;
-                });
-                /* ---- ./Reset user password data ----- */
-
-                // Clear old data from form when dismiss modal
-                $('#modal_reset_pwd').on('hidden.bs.modal', function (e) {
-                    $(this)
-                        .find("input,textarea,select")
-                        .val("")
-                        .end()
-                        .find("#reset_password_confirm_msg")
-                        .html("")
-                        .end();
-                });
-
-                // Clear old data from form when dismiss modal
-                $('#modal_add_new_user').on('hidden.bs.modal', function (e) {
-                    $(this)
-                        .find("input,textarea,select")
-                        .val("")
-                        .end()
-                        .find("span")
-                        .html("")
-                        .end()
-                        .find("input[type=checkbox], input[type=radio]")
-                        .prop("checked", "")
-                        .end();
-                });
 
                 /* ------ Add/Save new User -----*/
                 $("#div_select_facility").hide();
@@ -425,7 +289,7 @@
 
                     var txtName = $('#name').val();
                     var txtEmail = $('#email').val();
-                    var txtPassword = $('#pwd').val();
+                    var txtPassword = $('#password').val();
                     var roleOption = $('#role_selected').val();
                     var facOption = $('#facility_selected').val();
 
@@ -509,6 +373,7 @@
                 $(document).on('click', '#save_change_btn', function() {
                     var txtName = $('#edit_name').val();
                     var txtEmail = $('#edit_email').val();
+                    var txtPassword = $('#edit_password').val();
                     var roleOption = $('#role_selected_edit').val();
                     var txt_id = $('#save_change_btn').attr('name');
                     var facOption = $('#facility_selected_edit').val();
@@ -520,11 +385,12 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ url('/saveuserdata') }}",
-                        data: {_token: token, name: txtName, email: txtEmail, role: roleOption, facil: facOption, sid:txt_id},
+                        data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
+                        // data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption, sid:txt_id},
                         cache: false,
                         success: function(result)
                         {
-                           location.reload();
+                           //location.reload();
                         },
                         error: function(e)
                         {
@@ -533,9 +399,8 @@
                     });
                     return false;
                 });
-                /* ---- ./Save Edit data ----- */
 
-
+                /* ---- ./Display Edit data & Save Edit data ----- */
 
         });
 </script>

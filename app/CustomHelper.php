@@ -177,17 +177,31 @@ EOT;
      * @param $uID
      * @return mixed
      */
-    public static function update_user($name, $email, $pwd, $role, $facility_id, $uID)
+
+    public static function update_user($name, $email, $role, $facility_id, $uID)
     {
         $user = User::where('id','=', $uID)->first();
         $user->name = $name;
         $user->email = $email;
-        $user->password = Hash::make($pwd);
         $user->role = $role;
         if($facility_id != 0) $user->facility_id = $facility_id;
         else $user->facility_id=NULL;
         $user->save();
         // return newly inserted data
+        return $user->id;
+    }
+
+    /**
+     * Update user password by UserID
+     * @param $pwd
+     * @param $uID
+     * @return mixed
+     */
+    public static function update_user_pwd($pwd, $uID)
+    {
+        $user = User::where('id','=', $uID)->first();
+        $user->password = Hash::make($pwd);
+        $user->save();
         return $user->id;
     }
 

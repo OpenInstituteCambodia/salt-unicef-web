@@ -10,13 +10,14 @@
                         <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
                         {{ trans('allstr.add_facility') }}
                     </button>
+                    <hr>
                     <div class="clearfix"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table responsive" cellspacing="0" width="100%">
+                        <table class='table table-striped responsive' id='facil_mgmt_tbl' cellspacing='0' width='100%'>
                             <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -27,7 +28,7 @@
                                 <th class="text-center">{{ trans('allstr.action') }}</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody">
                             @if(!empty($all_facilities))
                                 <?php $i=0; ?>
                                 @foreach ($all_facilities as $each_facility)
@@ -174,6 +175,12 @@
             {
                 // global csrf token variable
                 var token = "{{ csrf_token() }}";
+
+                /* Initial Data table */
+                $('#facil_mgmt_tbl').DataTable( {
+                    deferRender:    true,
+                    scroller:       true,
+                } );
 
                 /* ------ Add/Save new Facility -----*/
                 /* Show Add New Facility Modal */

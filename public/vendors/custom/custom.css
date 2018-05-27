@@ -46,6 +46,16 @@ td > button.btn-outline-success:hover > i
     color:#fff;
 }
 
+td > button.btn-outline-info > i
+{
+    color:#17a2b8;
+}
+
+td > button.btn-outline-info:hover > i
+{
+    color:#fff;
+}
+
 td > button.btn-outline-danger > i {
     color: #dc3545;
 }
