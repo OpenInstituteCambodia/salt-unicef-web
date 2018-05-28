@@ -84,3 +84,101 @@ localhost/api/list_facilities_app
         ]
 }
 ```
+## 4. API for requesting for data from Table facilities by number_of_records & last_download_date [ Method POST ]
+```
+localhost/api/get_updated_facility_lists_app
+```
+#### Sample of Post Json
+```
+{
+	"number_of_records":"5",
+	"last_download_date":"2018-05-02"
+
+}
+```
+#### Result/Output
+##### If number of records in app and server is matched, Return only updated records
+```
+{
+    "code": "200",
+    "equal": 0,
+    "data": [
+        {
+            "id": 4,
+            "facility_ref_id": "F_004",
+            "facility_name": "ABC",
+            "Latitude": null,
+            "Longitude": null
+        },
+        {
+            "id": 5,
+            "facility_ref_id": "ss",
+            "facility_name": "ss",
+            "Latitude": null,
+            "Longitude": null
+        }
+        ........
+        ........
+    ]
+}
+```
+##### Else returned all records in tbl order_questions
+```
+{
+    "code": "200",
+    "equal": 0,
+    "data": [
+        {
+            "id": 1,
+            "facility_ref_id": "F_001",
+            "facility_name": "Daun Keo Salt Facility",
+            "Latitude": "11.582855",
+            "Longitude": "104.833521"
+        },
+        {
+            "id": 2,
+            "facility_ref_id": "F_002",
+            "facility_name": "Village Salt Facility",
+            "Latitude": "11.582855",
+            "Longitude": "104.833521"
+        },
+        {
+            "id": 3,
+            "facility_ref_id": "F_003",
+            "facility_name": "Kompot Salt Facility",
+            "Latitude": "11.582855",
+            "Longitude": "104.833521"
+        },
+        {
+            "id": 4,
+            "facility_ref_id": "F_004",
+            "facility_name": "ABC",
+            "Latitude": null,
+            "Longitude": null
+        },
+        {
+            "id": 5,
+            "facility_ref_id": "ss",
+            "facility_name": "ss",
+            "Latitude": null,
+            "Longitude": null
+        }
+        ..........
+        ..........
+    ]
+}
+```
+##### Input is not in JSON format
+```
+{
+    "code": "500",
+    "message": "Receiving data is not JSON format"
+}
+```
+##### If number_of_records or/and last_download_date is empty
+```
+{
+    "code": "500",
+    "message": "Either Number of records or Last download date is null. Those fields are required."
+}
+```

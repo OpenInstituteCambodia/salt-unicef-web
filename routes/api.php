@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/user_role_app', 'APIController@UserRoleApp');
 Route::post('/sync_data_app', 'APIController@SyncDataFromApp');
 Route::get('/list_facilities_app', 'APIController@ListFacilitiesForApp');
+Route::post('/get_updated_facility_lists_app', 'APIController@GetListOfUpdatedFacilities');

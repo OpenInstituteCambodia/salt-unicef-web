@@ -111,4 +111,32 @@ class APIController extends Controller
             'facilities'=> $all_facilities,
         ]);
     }
+
+    /**
+     * API to get List of updated records in Tbl facilities
+     * @param Request $request
+     * @return Collection of records
+     */
+
+    public function GetListOfUpdatedFacilities(Request $request){
+        if($request->getContentType() == 'json') {
+            if(!empty($request->number_of_records) || !empty($request->last_download_date))
+            {
+                return CustomHelper::get_facility_list($request->number_of_records,
+                    $request->last_download_date);
+            }
+            else{
+                return collect([
+                    'code' => '500',
+                    'message'=> "Either Number of records or Last download date is null. Those fields are required.",
+                ]);
+            }
+        }
+        else {
+            return collect([
+                'code' => '500',
+                'message'=> "Receiving data is not JSON format",
+            ]);
+        }
+    }
 }

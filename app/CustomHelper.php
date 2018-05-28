@@ -257,6 +257,47 @@ EOT;
         }
     }
 
+    /**
+     * Select updated records in facilities table
+     * @param $number_of_records_app
+     * @param $last_download_date
+     *
+     * Logic
+     *
+     * If number of records in app = number of records in server (table facilities)
+     * => select only update records where update at > last download date
+     * Else
+     * => select all records in whole table
+     * @return those record collection to app
+     *
+     */
+    public static function get_facility_list($number_of_records_app, $last_download_date){
+
+        // select current number of records in tbl facilities
+        $total_facility_records = Facility::count();
+        //dd($total_facility_records);
+        if($total_facility_records == $number_of_records_app){
+            // Select updated records where updated_at>$last_download_date
+            $query = <<<EOT
+            SELECT * FROM `facilities` WHERE updated_at > '{$last_download_date}'
+            ;
+EOT;
+// Notice that don't move/tab EOT; otherwise it is error
+            $records = DB::select($query);
+            $equal = 1;
+        }
+        else {
+            // Select all records and return to app
+            $records = Facility::all();
+            $equal = 0;
+        }
+        return collect([
+            'code' => '200',
+            'equal' => $equal,
+            'data'=> $records
+        ]);
+    }
+
 }
 
 
