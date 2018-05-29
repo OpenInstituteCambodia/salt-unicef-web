@@ -279,8 +279,7 @@ EOT;
         if($total_facility_records == $number_of_records_app){
             // Select updated records where updated_at>$last_download_date
             $query = <<<EOT
-            SELECT * FROM `facilities` WHERE updated_at > '{$last_download_date}'
-            ;
+            SELECT * FROM `facilities` WHERE updated_at > '{$last_download_date}' and deleted_at IS NULL
 EOT;
 // Notice that don't move/tab EOT; otherwise it is error
             $records = DB::select($query);
