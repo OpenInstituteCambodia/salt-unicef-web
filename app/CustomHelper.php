@@ -273,9 +273,9 @@ EOT;
      */
     public static function get_facility_list($number_of_records_app, $last_download_date){
 
-        // select current number of records in tbl facilities
+        // select current number of records in tbl facilities (Modal excluded deleted_at >o automatically)
         $total_facility_records = Facility::count();
-        //dd($total_facility_records);
+        // dd($total_facility_records);
         if($total_facility_records == $number_of_records_app){
             // Select updated records where updated_at>$last_download_date
             $query = <<<EOT
