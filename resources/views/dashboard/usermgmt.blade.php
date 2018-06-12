@@ -88,15 +88,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title text-primary"> {{ trans('allstr.add_user') }} </span>
+                    <strong class="modal-title text-primary"> {{ trans('allstr.add_user') }} </strong>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
                     </button>
                 </div>
-                <form>
+                <form method="post" enctype="application/x-www-form-urlencoded">
                 <div class='modal-body'>
                     <div class="form-group">
-                        <label for="name" class="col-md-4">{{ trans('allstr.name') }} <i class="text-red">*</i></label>
+                        <label for="name" class="col-md-6">{{ trans('allstr.name') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete='off'>
                             <div id="name_msg"></div>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="email" class="col-md-4">{{ trans('allstr.user_email') }} <i class="text-red">*</i></label>
+                        <label for="email" class="col-md-6">{{ trans('allstr.user_email') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="" required autocomplete='off'>
                             <div id="email_msg"></div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="pwd" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
+                        <label for="pwd" class="col-md-6">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="pwd" type="password" class="form-control" name="password" autocomplete='off' required>
                             <div id="pwd_msg"></div>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="confirm_pwd" class="col-md-4">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
+                        <label for="confirm_pwd" class="col-md-6">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
                         <div class="col-md-6">
                             <input id="confirm_pwd" type="password" class="form-control" name="password_confirmation" required>
                             <div id="confirm_pwd_msg"></div>
@@ -129,7 +129,7 @@
                     <div class="clearfix"></div>
 
                     <div class="form-group">
-                        <label for="role-option" class="col-md-4">{{ trans('allstr.user_role') }} <i class="text-red">*</i></label>
+                        <label for="role-option" class="col-md-6">{{ trans('allstr.user_role') }} <i class="text-red">*</i></label>
                         <div class="col-md-6 styled-select">
                             <select id="role_selected" autocomplete='off'>
                                 <option value="0" selected>{{ trans('allstr.select_user_option') }}</option>
@@ -143,7 +143,7 @@
                     <div class="clearfix"></div>
 
                     <div class="form-group" id="div_select_facility">
-                        <label for="facility-option" class="col-md-4">{{ trans('allstr.facility') }}</label>
+                        <label for="facility-option" class="col-md-6">{{ trans('allstr.facility') }}</label>
                         <div class="col-md-6 styled-select">
                             <select id="facility_selected" autocomplete='off'>
                                 <option value="0" selected>{{ trans('allstr.select_facility_option') }}</option>
@@ -176,7 +176,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"><b>{{ trans('allstr.dialog_confirm') }}</b></h3>
+                    <strong class="modal-title text-primary">{{ trans('allstr.dialog_confirm') }}</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <h4>
@@ -202,8 +205,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ trans('allstr.modal_edit_user') }}</h4>
+                    <strong class="modal-title text-primary" id="myModalLabel">{{ trans('allstr.modal_edit_user') }}</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
+                    </button>
                 </div>
                 <span id='user_info_detail'>
                     {{ csrf_field() }}
@@ -218,22 +223,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title text-primary"> {{ trans('allstr.reset_password') }} </span>
+                    <strong class="modal-title text-primary"> {{ trans('allstr.reset_password') }} </strong>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
                     </button>
                 </div>
-                <form>
+                <form method="post" enctype="application/x-www-form-urlencoded">
                     <div class='modal-body' id="modal_reset_body">
                         <div class="form-group">
-                            <label for="reset_password" class="col-md-4">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
+                            <label for="reset_password" class="col-md-6">{{ trans('allstr.password') }} <i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="reset_password" type="password" class="form-control" placeholder="Enter New Password" name="reset_password" autocomplete='off' required>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group">
-                            <label for="reset_password_confirm" class="col-md-4">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
+                            <label for="reset_password_confirm" class="col-md-6">{{ trans('allstr.password_confirm') }} <i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="reset_password_confirm" type="password" class="form-control" placeholder="Enter Password Again" name="reset_password_confirm" required>
                                 <div id="reset_password_confirm_msg"></div>
@@ -272,13 +277,13 @@
                 } );
 
                 // Add_New_user: Confirm match of password and reset password
-                $( "#confirm_pwd" ).keyup(function() {
+                $( "#confirm_pwd" ).focusout(function() {
                     var pwd = $('#pwd').val();
                     var pwd_confirm = $('#confirm_pwd').val();
                     if(pwd != "")
                     {
-                        if(pwd_confirm != pwd) $('#confirm_pwd_msg').html('<span style="color: red;">Password mismatched!!</span>');
-                        else $('#confirm_pwd_msg').html('<span style="color: green;">Password mismatched!!</span>');
+                        if(pwd_confirm != pwd) $('#confirm_pwd_msg').html('<span style="color: red;">{{trans('allstr.password_mismatched')}}</span>');
+                        else $('#confirm_pwd_msg').html('<span style="color: green;">{{trans('allstr.password_matched')}}</span>');
                     }
                 });
 
@@ -288,8 +293,10 @@
                     var reset_pwd_confirm = $('#reset_password_confirm').val();
                     if(reset_pwd != "")
                     {
-                        if(reset_pwd_confirm != reset_pwd) $('#reset_password_confirm_msg').html('<span style="color: red;">Password mismatched!!</span>');
-                        else $('#reset_password_confirm_msg').html('<span style="color: green;">Password mismatched!!</span>');
+                        if(reset_pwd_confirm != reset_pwd)
+                            $('#reset_password_confirm_msg').html('<span style="color: red;">{{trans('allstr.password_mismatched')}}</span>');
+                        else
+                            $('#reset_password_confirm_msg').html('<span style="color: green;">{{trans('allstr.password_matched')}}</span>');
                     }
                 });
 
@@ -311,7 +318,7 @@
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/saveresetpassword') }}",
+                        url: "{{ route('saveresetpassword') }}",
                         data: {_token: token, resetpwd: txtResetPassword, sid:txt_id},
                         cache: false,
                         success: function(result)
@@ -341,7 +348,7 @@
                 // Clear old data from form when dismiss modal
                 $('#modal_add_new_user').on('hidden.bs.modal', function (e) {
                     $(this)
-                        .find("input,textarea,select")
+                        .find("input,textarea")
                         .val("")
                         .end()
                         .find("span")
@@ -356,12 +363,12 @@
                 $("#div_select_facility").hide();
 
                 /* Checking Existing Email for add new user form */
-                $(document).on('keyup', "#email", function(){
+                $(document).on('focusout', "#email", function(){
                     var txtEmail = $('#email').val();
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/checkexistingemail') }}",
+                        url: "{{ route('checkexistingemail') }}",
                         data: {_token: token, email: txtEmail},
                         cache: false,
                         success: function(result)
@@ -430,13 +437,13 @@
                     var facOption = $('#facility_selected').val();
 
                     if(roleOption ==0) {
-                        $('#option_msg').html("<span style='color: red;'>Role is required</span>");
+                        $('#option_msg').html("<span style='color: red;'>{{ trans('allstr.required_role') }}</span>");
                     }
 
-                    if(txtName ==''){ $('#name_msg').html("<span style='color: red;'>Name cannot be blank</span>"); }
+                    if(txtName ==''){ $('#name_msg').html("<span style='color: red;'>{{ trans('allstr.required_name') }}</span>"); }
                     else { $('#name_msg').html(""); }
 
-                    if(txtPassword ==''){ $('#pwd_msg').html("<span style='color: red;'>Password cannot be blank</span>");}
+                    if(txtPassword ==''){ $('#pwd_msg').html("<span style='color: red;'>{{ trans('allstr.required_password') }}</span>");}
                     else { $('#pwd_msg').html(""); }
 
                     if (validateEmail(txtEmail) && txtName !='' && txtPassword !='' && roleOption !=0)
@@ -444,7 +451,7 @@
                         // post data to server using ajax
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('/addnewuser') }}",
+                            url: "{{ route('addnewuser') }}",
                             data: {_token: token, name: txtName, email: txtEmail, pwd: txtPassword, role: roleOption, facil: facOption},
                             cache: false,
                             success: function(result)
@@ -457,10 +464,10 @@
                             }
                         });
                     }
-                    else if(txtEmail =='') $('#email_msg').html("<span style='color: red;'>Email is required</span>");
+                    else if(txtEmail =='') $('#email_msg').html("<span style='color: red;'>{{ trans('allstr.required_email') }}</span>");
                     else if(!validateEmail(txtEmail))
                     {
-                        $('#email_msg').html("<span style='color: red;'>Incorrect Email format</span>");
+                        $('#email_msg').html("<span style='color: red;'>{{ trans('allstr.incorrect_email') }}</span>");
                     }
 
                     return false;
@@ -474,7 +481,7 @@
                     $('#btn_delete_yes').click(function(e){
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('/deleteuser') }}",
+                            url: "{{ route('deleteuser') }}",
                             data: {_token: token, delete_val: btn_delete_val},
                             cache: false,
                             success: function()
@@ -493,7 +500,7 @@
                     var btn_val = $(this).attr('name');
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/userinfo') }}",
+                        url: "{{ route('userinfo') }}",
                         data: {_token: token, id: btn_val},
                         cache: false,
                         success: function(result)
@@ -519,7 +526,7 @@
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/saveuserdata') }}",
+                        url: "{{ route('saveuserdata') }}",
                         data: {_token: token, name: txtName, email: txtEmail, role: roleOption, facil: facOption, sid:txt_id},
                         cache: false,
                         success: function(result)

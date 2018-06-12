@@ -82,7 +82,7 @@ select {
     line-height: 1;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    height: 34px;
+    height: 40px;
     -webkit-appearance: none;
 }
 
@@ -1599,7 +1599,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:disabled, .btn-link.disabled {
-    color: #6c757d;
+    color: #ffffff;
 }
 
 .btn-lg, .btn-group-lg > .btn {
@@ -1938,6 +1938,9 @@ tbody.collapse.show {
     border-bottom-left-radius: 0;
 }
 
-
-
 /* -------- end of bootstrap 4.0 style ---------------------- */
+
+.full-top{
+    float:left;
+    position: absolute;
+}

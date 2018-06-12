@@ -71,7 +71,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="modal-title text-primary"> {{ trans('allstr.add_facility') }} </span>
+                    <strong class="modal-title text-primary"> {{ trans('allstr.add_facility') }} </strong>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
                     </button>
@@ -79,7 +79,7 @@
                 <form>
                     <div class='modal-body'>
                         <div class="form-group">
-                            <label for="faci_ref_id" class="col-md-4">{{ trans('allstr.facility_ref_id') }}<i class="text-red">*</i></label>
+                            <label for="faci_ref_id" class="col-md-6">{{ trans('allstr.facility_ref_id') }}<i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="faci_ref_id" type="text" class="form-control" name="faci_ref_id" autofocus autocomplete='off'>
                             </div>
@@ -87,7 +87,7 @@
                         <div class="clearfix"></div>
 
                         <div class="form-group">
-                            <label for="faci_name" class="col-md-4">{{ trans('allstr.name') }}<i class="text-red">*</i></label>
+                            <label for="faci_name" class="col-md-6">{{ trans('allstr.name') }}<i class="text-red">*</i></label>
                             <div class="col-md-6">
                                 <input id="faci_name" type="text" class="form-control" name="faci_name" required autocomplete='off'>
                             </div>
@@ -95,7 +95,7 @@
                         <div class="clearfix"></div>
 
                         <div class="form-group">
-                            <label for="faci_latitude" class="col-md-4">{{ trans('allstr.lat') }}</label>
+                            <label for="faci_latitude" class="col-md-6">{{ trans('allstr.lat') }}</label>
                             <div class="col-md-6">
                                 <input id="faci_latitude" type="text" class="form-control" name="faci_latitude"  autocomplete='off'>
                             </div>
@@ -103,7 +103,7 @@
                         <div class="clearfix"></div>
 
                         <div class="form-group">
-                            <label for="faci_longitude" class="col-md-4">{{ trans('allstr.long') }}</label>
+                            <label for="faci_longitude" class="col-md-6">{{ trans('allstr.long') }}</label>
                             <div class="col-md-6">
                                 <input id="faci_longitude" type="text" class="form-control" name="faci_longitude"  autocomplete='off'>
                             </div>
@@ -131,7 +131,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"><b>{{ trans('allstr.dialog_confirm') }}</b></h3>
+                    <strong class="modal-title text-primary">{{ trans('allstr.dialog_confirm') }}</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <h4>
@@ -157,8 +160,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ trans('allstr.modal_edit_faci') }}</h4>
+                    <strong class="modal-title text-primary" id="myModalLabel">{{ trans('allstr.modal_edit_faci') }}</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="fa fa-times-circle-o fa-lg text-red"></span>
+                    </button>
                 </div>
                 <span id='faci_info_detail'>
                     {{ csrf_field() }}
@@ -208,7 +213,7 @@
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/addnewfaci') }}",
+                        url: "{{ route('addnewfaci') }}",
                         data: {_token: token, faciRef: txtFaciRef, faciName: txtFaciName, faciLat: txtFaciLat, faciLong: txtFaciLong},
                         cache: false,
                         success: function(result)
@@ -231,7 +236,7 @@
                     $('#btn_delete_yes').click(function(e){
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('/deletefaci') }}",
+                            url: "{{ route('deletefaci') }}",
                             data: {_token: token, delete_val: btn_delete_val},
                             cache: false,
                             success: function()
@@ -250,7 +255,7 @@
                     var btn_val = $(this).attr('name');
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/faciinfo') }}",
+                        url: "{{ route('faciinfo') }}",
                         data: {_token: token, id: btn_val},
                         cache: false,
                         success: function(result)
@@ -273,7 +278,7 @@
                     // post data to server using ajax
                     $.ajax({
                         type: "POST",
-                        url: "{{ url('/savefacidata') }}",
+                        url: "{{ route('savefacidata') }}",
                         data: {_token: token, faciRef: txtFaciRef, faciName: txtFaciName, faciLat: txtFaciLat, faciLong: txtFaciLong, fid:txt_id},
                         cache: false,
                         success: function(result)

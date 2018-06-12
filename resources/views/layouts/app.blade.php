@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Salt') }}</title>
+    <title>{{ trans('allstr.salt') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -33,7 +33,7 @@
                         <b><img src="logo.png" alt="" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span>{{__('allstr.salt')}}</span>
+                        <span>{{ trans('allstr.salt') }}</span>
                     </a>
                 </div>
             </div>

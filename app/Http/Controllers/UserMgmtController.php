@@ -18,6 +18,7 @@ class UserMgmtController extends Controller
      */
     public function addNewUser(Request $request)
     {
+        logger('AA');
         CustomHelper::save_new_user($request->name, $request->email, $request->pwd, $request->role, $request->facil);
         // return view('dashboard/monthlyreport');
         // return view('dashboard/facilitymgmt',['all_facilities' => $fac_result]);
@@ -84,7 +85,7 @@ class UserMgmtController extends Controller
             {
                 $facility_option = $facility_option . "<option value='". $each_facility->id . "'>" . $each_facility->facility_name . "</option>";
             }
-            $facility_options = "<label for='facility_option_edit' class='col-md-4'>"
+            $facility_options = "<label for='facility_option_edit' class='col-md-6'>"
                                         . trans('allstr.facility')
                                     . "</label>"
                                     . "<div class='col-md-6'>"
@@ -100,7 +101,7 @@ class UserMgmtController extends Controller
         // Data to be displayed in body and footer of modal
         $user_data = "<div class='modal-body'>"
                         . "<div class='form-group'>"
-                            . "<label for='edit_name' class='col-md-4'>"
+                            . "<label for='edit_name' class='col-md-6'>"
                                 . trans('allstr.name')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -110,7 +111,7 @@ class UserMgmtController extends Controller
                         . "<div class='clearfix'></div>"
 
                         . "<div class='form-group'>"
-                            . "<label for='edit_email' class='col-md-4'>"
+                            . "<label for='edit_email' class='col-md-6'>"
                                 . trans('allstr.user_email')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -120,7 +121,7 @@ class UserMgmtController extends Controller
                         . "<div class='clearfix'></div>"
 
 //                        . "<div class='form-group'>"
-//                            . "<label for='edit_password' class='col-md-4'>"
+//                            . "<label for='edit_password' class='col-md-6'>"
 //                                . trans('allstr.user_pwd')
 //                            . "</label>"
 //                            . "<div class='col-md-6'>"
@@ -130,7 +131,7 @@ class UserMgmtController extends Controller
 //                        . "<div class='clearfix'></div>"
 
                         . "<div class='form-group'>"
-                            . "<label for='role_option_edit' class='col-md-4'>"
+                            . "<label for='role_option_edit' class='col-md-6'>"
                                 . trans('allstr.user_role')
                             . "</label>"
                             . "<div class='col-md-6 styled-select'>"
@@ -175,7 +176,7 @@ class UserMgmtController extends Controller
         {
             $faci_option = $faci_option . "<option value='". $each_faci->id . "'>" . $each_faci->facility_name . "</option>";
         }
-        $new_select_data = "<label for='facility_option_edit' class='col-md-4'>"
+        $new_select_data = "<label for='facility_option_edit' class='col-md-6'>"
                                 . trans('allstr.facility')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -206,7 +207,7 @@ class UserMgmtController extends Controller
         $existing_email = User::where('email', '=', $request->email)->first();
         if(!empty($existing_email))
         {
-            $result = "Email exists!";
+            $result = trans('allstr.email_exists');
         }
         else
         {

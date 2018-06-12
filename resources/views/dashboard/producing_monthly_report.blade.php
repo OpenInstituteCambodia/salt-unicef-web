@@ -49,8 +49,12 @@
                         <th class='text-center'> {{ trans('allstr.iodized_salt_produced') }} </th>
                         <th class='text-center'> {{ trans('allstr.potassium_used') }} </th>
                         <th class='text-center'> {{ trans('allstr.total_number_days') }} </th>
-                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_UNICEF_standard') }} </th>
-                        <th class='text-center'> {{ trans('allstr.radio_iodized_salt_produced_over_potassium_used') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_0_15ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_15_30ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_30_50ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_50_60ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_days_producing_over_60ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.ratio_iodized_salt_produced_over_potassium_used') }} </th>
                     </tr>
                 </thead>
                 <tbody id="tbody"></tbody>
@@ -66,6 +70,18 @@
             $(function() {
                 // global csrf token variable
                 var token = "{{ csrf_token() }}";
+
+                $('#prod_measurement_tbl').DataTable( {
+                    deferRender:    true,
+                    scroller:       true,
+//                    scrollY:       true,
+//                    scrollX:        true,
+//                    scrollCollapse: true,
+////                    paging:         false,
+//                    fixedColumns:   {
+//                        leftColumns: 2
+//                    }
+                });
 
                 $('#startdatepicker').datepicker({
                     format: 'yyyy-mm-dd',
@@ -92,7 +108,7 @@
                             destroy: true,
                             "ajax": {
                                 type: "POST",
-                                url: "{{ url('/productionreport') }}",
+                                url: "{{ route('productionreport') }}",
                                 data: {_token: token, start_date: start_date_val, end_date: end_date_val},
                                 cache: false,
                                 dataSrc: 'data'
@@ -103,12 +119,18 @@
                                 { "data": "iodized_salt_produced" },
                                 { "data": "potassium_used" },
                                 { "data": "total_number_days" },
-                                { "data": "percentage_of_days_producing_per_standard" },
-                                { "data": "radio_iodized_salt_produced_over_potassium_used" }
+                                { "data": "percentage_of_days_producing_0_15ppm" },
+                                { "data": "percentage_of_days_producing_15_30ppm" },
+                                { "data": "percentage_of_days_producing_30_50ppm" },
+                                { "data": "percentage_of_days_producing_50_60ppm" },
+                                { "data": "percentage_of_days_producing_over_60ppm" },
+                                { "data": "ratio_iodized_salt_produced_over_potassium_used" }
                             ],
 
                             deferRender:    true,
                             scroller:       true,
+
+
                         } );
 //                    }
                     $("#prod_measurement_tbl").show();

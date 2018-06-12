@@ -39,7 +39,7 @@ class FacilityMgmtController extends Controller
         // Data to be displayed in body and footer of modal
         $faci_data = "<div class='modal-body'>"
                         . "<div class='form-group'>"
-                            . "<label for='edit_faci_ref_id' class='col-md-4'>"
+                            . "<label for='edit_faci_ref_id' class='col-md-6'>"
                                 . trans('allstr.facility_ref_id')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -49,7 +49,7 @@ class FacilityMgmtController extends Controller
                         . "<div class='clearfix'></div>"
 
                         . "<div class='form-group'>"
-                            . "<label for='edit_faci_name' class='col-md-4'>"
+                            . "<label for='edit_faci_name' class='col-md-6'>"
                                 . trans('allstr.name')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -59,7 +59,7 @@ class FacilityMgmtController extends Controller
                         . "<div class='clearfix'></div>"
 
                         . "<div class='form-group'>"
-                            . "<label for='edit_faci_lat' class='col-md-4'>"
+                            . "<label for='edit_faci_lat' class='col-md-6'>"
                                 . trans('allstr.lat')
                             . "</label>"
                             . "<div class='col-md-6'>"
@@ -70,7 +70,7 @@ class FacilityMgmtController extends Controller
 
 
                         . "<div class='form-group'>"
-                            . "<label for='edit_faci_long' class='col-md-4'>"
+                            . "<label for='edit_faci_long' class='col-md-6'>"
                                 . trans('allstr.long')
                             . "</label>"
                             . "<div class='col-md-6'>"

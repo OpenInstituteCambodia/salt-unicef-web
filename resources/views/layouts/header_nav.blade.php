@@ -11,7 +11,7 @@
         <!-- Logo icon -->
         <b><img src="logo.png" alt="" class="dark-logo" /></b>
         <!-- Logo text -->
-        <span>{{__('allstr.salt')}}</span>
+        <span>{{ trans('allstr.salt') }}</span>
       </a>
     </h1>
   </div><!-- /.navbar-header -->
@@ -19,15 +19,40 @@
     <div class="full-left">
       <section class="full-top">
         <button id="toggle"><i class="fa fa-arrows-alt"></i></button>
+        <!-- language -->
+        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @if(LaravelLocalization::getCurrentLocale() == 'en')
+            <img src="/en.png" alt="English"> English
+          @else
+            <img src="/kh.png" alt="ភាសាខ្មែរ"> ភាសាខ្មែរ
+          @endif
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          @if(LaravelLocalization::getCurrentLocale() == 'en')
+            <li>
+              <a rel="alternate" hreflang="km" href="{{ LaravelLocalization::getLocalizedURL('km') }}">
+                <img src="/kh.png" alt="ភាសាខ្មែរ"> ភាសាខ្មែរ
+              </a>
+            </li>
+          @else
+            <li>
+              <a rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en') }}">
+                <img src="/en.png" alt="English"> English
+              </a>
+            </li>
+          @endif
+        </ul>
       </section>
       <div class="clearfix"></div>
     </div>
-
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="drop-men">
+
       <ul class="nav">
+
         <li class="dropdown" style="padding: 5px">
+
           <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown">
             <span class=" name-caret">
               @if (Auth::check()) {{ Auth::user()->name }}
@@ -40,6 +65,7 @@
             <li><a href="{{route('logout')}}"><i class="fa fa-power-off fa-lg"></i> Logout</a></li>
           </ul>
         </li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
     <div class="clearfix"></div>

@@ -46,7 +46,10 @@
                         <th class='text-center'> {{ trans('allstr.no') }} </th>
                         <th class='text-center'> {{ trans('allstr.facility_name') }} </th>
                         <th class='text-center'> {{ trans('allstr.number_of_inspections') }} </th>
-                        <th class='text-center'> {{ trans('allstr.%_of_samples_within_UNICEF_standard') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_samples_within_0_15ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_samples_within_15_30ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_samples_within_30_60ppm') }} </th>
+                        <th class='text-center'> {{ trans('allstr.%_of_samples_over_60ppm') }} </th>
                         <th class='text-center'> {{ trans('allstr.warning_received') }} </th>
                     </tr>
                     </thead>
@@ -63,6 +66,12 @@
                 $(function() {
                     // global csrf token variable
                     var token = "{{ csrf_token() }}";
+
+                    $('#monitor_measurement_tbl').DataTable({
+                        deferRender:    true,
+                        scroller:       true
+                    });
+
 
                     $('#startdatepicker').datepicker({
                         format: 'yyyy-mm-dd',
@@ -90,7 +99,7 @@
                             destroy: true,
                             "ajax": {
                                 type: "POST",
-                                url: "{{ url('/inspectionreport') }}",
+                                url: "{{ route('inspectionreport') }}",
                                 data: {_token: token, start_date: start_date_val, end_date: end_date_val},
                                 cache: false,
                                 dataSrc: 'data'
@@ -99,7 +108,10 @@
                                 { "data": "No" },
                                 { "data": "facility_name" },
                                 { "data": "number_inspection" },
-                                { "data": "percentage_of_samples_per_standard" },
+                                { "data": "percentage_of_samples_0_15ppm" },
+                                { "data": "percentage_of_samples_15_30ppm" },
+                                { "data": "percentage_of_samples_30_60ppm" },
+                                { "data": "percentage_of_samples_over_60ppm" },
                                 { "data": "total_warning" }
                             ],
                             deferRender:    true,

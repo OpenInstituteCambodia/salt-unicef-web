@@ -16,16 +16,48 @@ class CustomHelper {
 
         $producer_measure = <<<EOT
     SELECT `producer_measurements`.`facility_id` AS facil_id, `facilities`.`facility_name`, 
-      SUM(producer_measurements.quantity_salt_processed) as total_salt_produced, 
-      SUM(producer_measurements.quantity_potassium_iodate) as total_potassium_produced, 
-      concat(round(((sum(IF(`producer_measurements`.`measurement_1` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_1`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_2` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_2`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_3` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_3`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_4` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_4`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_5` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_5`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_6` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_6`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_7` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_7`, 0 ))
-            +sum(IF(`producer_measurements`.`measurement_8` BETWEEN 30 AND 50 , `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days,
+      SUM(round(producer_measurements.quantity_salt_processed,2)) as total_salt_produced, 
+      SUM(round(producer_measurements.quantity_potassium_iodate,2)) as total_potassium_produced, 
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` >= 0 AND `producer_measurements`.`measurement_1` < 15 , `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` >= 0 AND `producer_measurements`.`measurement_2` < 15 , `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` >= 0 AND `producer_measurements`.`measurement_3` < 15 , `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` >= 0 AND `producer_measurements`.`measurement_4` < 15 , `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` >= 0 AND `producer_measurements`.`measurement_5` < 15 , `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` >= 0 AND `producer_measurements`.`measurement_6` < 15 , `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` >= 0 AND `producer_measurements`.`measurement_7` < 15 , `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` >= 0 AND `producer_measurements`.`measurement_8` < 15 , `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days_0_15ppm,          
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` >= 15 AND `producer_measurements`.`measurement_1` < 30 , `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` >= 15 AND `producer_measurements`.`measurement_2` < 30 , `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` >= 15 AND `producer_measurements`.`measurement_3` < 30 , `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` >= 15 AND `producer_measurements`.`measurement_4` < 30 , `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` >= 15 AND `producer_measurements`.`measurement_5` < 30 , `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` >= 15 AND `producer_measurements`.`measurement_6` < 30 , `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` >= 15 AND `producer_measurements`.`measurement_7` < 30 , `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` >= 15 AND `producer_measurements`.`measurement_8` < 30 , `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days_15_30ppm,            
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` >= 30 AND `producer_measurements`.`measurement_1` < 50, `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` >= 30 AND `producer_measurements`.`measurement_2` < 50, `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` >= 30 AND `producer_measurements`.`measurement_3` < 50, `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` >= 30 AND `producer_measurements`.`measurement_4` < 50, `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` >= 30 AND `producer_measurements`.`measurement_5` < 50, `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` >= 30 AND `producer_measurements`.`measurement_6` < 50, `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` >= 30 AND `producer_measurements`.`measurement_7` < 50, `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` >= 30 AND `producer_measurements`.`measurement_8` < 50, `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days_30_50ppm,            
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` >= 50 AND `producer_measurements`.`measurement_1` < 60, `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` >= 50 AND `producer_measurements`.`measurement_2` < 60, `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` >= 50 AND `producer_measurements`.`measurement_3` < 60, `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` >= 50 AND `producer_measurements`.`measurement_4` < 60, `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` >= 50 AND `producer_measurements`.`measurement_5` < 60, `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` >= 50 AND `producer_measurements`.`measurement_6` < 60, `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` >= 50 AND `producer_measurements`.`measurement_7` < 60, `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` >= 50 AND `producer_measurements`.`measurement_8` < 60, `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days_50_60ppm,            
+      concat(round(((sum(IF(`producer_measurements`.`measurement_1` >= 60, `producer_measurements`.`measurement_1`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_2` >= 60, `producer_measurements`.`measurement_2`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_3` >= 60, `producer_measurements`.`measurement_3`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_4` >= 60, `producer_measurements`.`measurement_4`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_5` >= 60, `producer_measurements`.`measurement_5`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_6` >= 60, `producer_measurements`.`measurement_6`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_7` >= 60, `producer_measurements`.`measurement_7`, 0 ))
+            +sum(IF(`producer_measurements`.`measurement_8` >= 60, `producer_measurements`.`measurement_8`, 0 )))/{$number_days}),2),'%') as percentage_days_over_60ppm,
       concat(round(1/(SUM(producer_measurements.quantity_salt_processed)/SUM(producer_measurements.quantity_potassium_iodate)),1),":1") AS ratio_iodized_over_potassium
       FROM `producer_measurements` inner join `facilities` on `producer_measurements`.`facility_id` = `facilities`.`id`
       where `producer_measurements`.`date_of_data` between '{$from_date} 00:00:00' and '{$to_date} 23:59:59'
@@ -42,7 +74,10 @@ EOT;
         $monitor_measure = <<<EOT
             select `facilities`.`id` as `faci_id`, `facilities`.`facility_name`, 
             COUNT(`monitor_measurements`.`facility_id`) as num_inspections,
-            concat(round(SUM(IF(`monitor_measurements`.`measurement` BETWEEN 15 AND 50, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` BETWEEN 15 AND 50, 1, 0)),2),'%') AS percentage_samples,
+            concat(round(SUM(IF(`monitor_measurements`.`measurement` >= 0 AND `monitor_measurements`.`measurement` < 15, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` >= 0 AND `monitor_measurements`.`measurement` < 15, 1, 0)),2),'%') AS percentage_0_15,
+            concat(round(SUM(IF(`monitor_measurements`.`measurement` >= 15 AND `monitor_measurements`.`measurement` < 30, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` >= 15 AND `monitor_measurements`.`measurement` < 30, 1, 0)),2),'%') AS percentage_15_30,        
+            concat(round(SUM(IF(`monitor_measurements`.`measurement` >= 30 AND `monitor_measurements`.`measurement` < 60, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` >= 30 AND `monitor_measurements`.`measurement` < 60, 1, 0)),2),'%') AS percentage_30_60,
+            concat(round(SUM(IF(`monitor_measurements`.`measurement` >= 60, `monitor_measurements`.`measurement`, 0))/SUM(IF(`monitor_measurements`.`measurement` >= 60, 1, 0)),2),'%') AS percentage_over_60,
             SUM(IF(`monitor_measurements`.`warning`=1,1,0)) as total_warning
             from `monitor_measurements` inner join `facilities` on `monitor_measurements`.`facility_id` = `facilities`.`id` 
             where `monitor_measurements`.`date_of_visit` between '{$from_date} 00:00:00' and '{$to_date} 23:59:59' 
@@ -76,7 +111,6 @@ EOT;
         $faci_info = Facility::where('id', '=', $facility_id)-> first();
         return $faci_info;
     }
-
 
     /**
      * Insert new Facility

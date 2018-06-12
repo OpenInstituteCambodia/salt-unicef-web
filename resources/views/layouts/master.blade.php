@@ -5,9 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title> Salt </title>
-
+        <title> {{ trans('allstr.salt') }} </title>
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
     </script>

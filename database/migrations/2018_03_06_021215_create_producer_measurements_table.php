@@ -19,17 +19,17 @@ class CreateProducerMeasurementsTable extends Migration
             $table->integer('facility_id')->nullable();
             $table->dateTime('date_of_data')->comment('date of measurement');
             $table->dateTime('date_reported')->default(\DB::raw('CURRENT_TIMESTAMP'))->comment('date of record is inserted)');
-            $table->integer('quantity_salt_processed')->comment('Quantity of salt processed in that day (Kg.)');
-            $table->integer('quantity_potassium_iodate')->comment('Quantity of potassium iodate used in that day (Kg.)');
-            $table->integer('stock_potassium')->comment('Stock of potassium at the end of that day (Kg.)');
-            $table->integer('measurement_1');
-            $table->integer('measurement_2')->nullable()->default(NULL);
-            $table->integer('measurement_3')->nullable()->default(NULL);
-            $table->integer('measurement_4')->nullable()->default(NULL);
-            $table->integer('measurement_5')->nullable()->default(NULL);
-            $table->integer('measurement_6')->nullable()->default(NULL);
-            $table->integer('measurement_7')->nullable()->default(NULL);
-            $table->integer('measurement_8')->nullable()->default(NULL);
+            $table->float('quantity_salt_processed')->comment('Quantity of salt processed in that day (Kg.)');
+            $table->float('quantity_potassium_iodate')->comment('Quantity of potassium iodate used in that day (Kg.)');
+            $table->float('stock_potassium')->comment('Stock of potassium at the end of that day (Kg.)');
+            $table->float('measurement_1');
+            $table->float('measurement_2')->nullable()->default(NULL);
+            $table->float('measurement_3')->nullable()->default(NULL);
+            $table->float('measurement_4')->nullable()->default(NULL);
+            $table->float('measurement_5')->nullable()->default(NULL);
+            $table->float('measurement_6')->nullable()->default(NULL);
+            $table->float('measurement_7')->nullable()->default(NULL);
+            $table->float('measurement_8')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

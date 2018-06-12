@@ -32,8 +32,12 @@ class ReportController extends Controller
                     'iodized_salt_produced'=>$producer_each_result->total_salt_produced,
                     'potassium_used'=>$producer_each_result->total_potassium_produced,
                     'total_number_days' => $number_of_days,
-                    'percentage_of_days_producing_per_standard'=>$producer_each_result->percentage_days,
-                    'radio_iodized_salt_produced_over_potassium_used'=>$producer_each_result->ratio_iodized_over_potassium
+                    'percentage_of_days_producing_0_15ppm'=>$producer_each_result->percentage_days_0_15ppm,
+                    'percentage_of_days_producing_15_30ppm'=>$producer_each_result->percentage_days_15_30ppm,
+                    'percentage_of_days_producing_30_50ppm'=>$producer_each_result->percentage_days_30_50ppm,
+                    'percentage_of_days_producing_50_60ppm'=>$producer_each_result->percentage_days_50_60ppm,
+                    'percentage_of_days_producing_over_60ppm'=>$producer_each_result->percentage_days_over_60ppm,
+                    'ratio_iodized_salt_produced_over_potassium_used'=>$producer_each_result->ratio_iodized_over_potassium
                 );
                 // push each array of a record into all_array
                 array_push($all_arr, $arr_each);
@@ -58,7 +62,10 @@ class ReportController extends Controller
                     "No" => $i,
                     "facility_name"=>$each_result->facility_name,
                     'number_inspection'=>$each_result->num_inspections,
-                    'percentage_of_samples_per_standard'=>$each_result->percentage_samples,
+                    'percentage_of_samples_0_15ppm'=>$each_result->percentage_0_15,
+                    'percentage_of_samples_15_30ppm'=>$each_result->percentage_15_30,
+                    'percentage_of_samples_30_60ppm'=>$each_result->percentage_30_60,
+                    'percentage_of_samples_over_60ppm'=>$each_result->percentage_over_60,
                     'total_warning'=>$each_result->total_warning
                 );
                 // push each array of a record into all_array

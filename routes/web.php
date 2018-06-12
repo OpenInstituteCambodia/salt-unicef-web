@@ -11,48 +11,52 @@
 |
 */
 
-Auth::routes();
 
-Route::get('/', function () {
-    return view('auth/login');
-});
 
 use Illuminate\Support\Facades\Auth;
 
 // ---- Routes require Auth()-login
-Route::group(['middleware' => ['auth']], function(){
-    // ----- Display in Dashboard --------
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function()
+{
+    Auth::routes();
 
-    // --------- User Mgmt - Display, Add, Edit & Delete ---------
-    Route::get('/usermgmt', 'DashboardController@userManagement')->name('usermgmt');
-    Route::post('/addnewuser', 'UserMgmtController@addNewUser')->name('addnewuser');
-    Route::post('/deleteuser', 'UserMgmtController@softDeleteUser')->name('deleteuser');
-    Route::post('/userinfo', 'UserMgmtController@displayUserInfoById')->name('userinfo');
-    Route::get('/getfacility', 'UserMgmtController@getFacility')->name('getfacility');
-    Route::post('/saveuserdata', 'UserMgmtController@saveEditUserData')->name('saveuserdata');
-    Route::post('/checkexistingemail', 'UserMgmtController@checkExistingEmail')->name('checkexistingemail');
-    Route::post('/saveresetpassword', 'UserMgmtController@saveResetPassword')->name('saveresetpassword');
+    Route::get('/', 'DashboardController@gotoLogin');
 
+    Route::group(['middleware'=>'auth'], function()
+    {
+        // ----- Display in Dashboard --------
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-    // --------- Facility Mgmt - Display, Add, Edit & Delete ---------
-    Route::get('/facilitymgmt', 'DashboardController@facilityManagement')->name('facilitymgmt');
-    Route::post('/addnewfaci', 'FacilityMgmtController@addNewFacility')->name('addnewfaci');
-    Route::post('/deletefaci', 'FacilityMgmtController@softDeleteFacility')->name('deletefaci');
-    Route::post('/savefacidata', 'FacilityMgmtController@saveEditFacilityData')->name('savefacidata');
-    Route::post('/faciinfo', 'FacilityMgmtController@displayFacilityInfoById')->name('faciinfo');
+        // --------- User Mgmt - Display, Add, Edit & Delete ---------
+        Route::get('/usermgmt', 'DashboardController@userManagement')->name('usermgmt');
+        Route::post('/addnewuser', 'UserMgmtController@addNewUser')->name('addnewuser');
+        Route::post('/deleteuser', 'UserMgmtController@softDeleteUser')->name('deleteuser');
+        Route::post('/userinfo', 'UserMgmtController@displayUserInfoById')->name('userinfo');
+        Route::get('/getfacility', 'UserMgmtController@getFacility')->name('getfacility');
+        Route::post('/saveuserdata', 'UserMgmtController@saveEditUserData')->name('saveuserdata');
+        Route::post('/checkexistingemail', 'UserMgmtController@checkExistingEmail')->name('checkexistingemail');
+        Route::post('/saveresetpassword', 'UserMgmtController@saveResetPassword')->name('saveresetpassword');
 
-    // --------- Report ---------
-    Route::get('/productionreportdisp', 'DashboardController@monthlyProductionReportView')->name('productionreportdisp');
-    Route::get('/inspectionreportdisp', 'DashboardController@monthlyMonitoringReportView')->name('inspectionreportdisp');
+        // --------- Facility Mgmt - Display, Add, Edit & Delete ---------
+        Route::get('/facilitymgmt', 'DashboardController@facilityManagement')->name('facilitymgmt');
+        Route::post('/addnewfaci', 'FacilityMgmtController@addNewFacility')->name('addnewfaci');
+        Route::post('/deletefaci', 'FacilityMgmtController@softDeleteFacility')->name('deletefaci');
+        Route::post('/savefacidata', 'FacilityMgmtController@saveEditFacilityData')->name('savefacidata');
+        Route::post('/faciinfo', 'FacilityMgmtController@displayFacilityInfoById')->name('faciinfo');
 
-    Route::post('/productionreport', 'ReportController@monthlyProductionReport')->name('productionreport');
-    Route::post('/inspectionreport', 'ReportController@monthlyMonitoringReport')->name('inspectionreport');
+        // --------- Report ---------
+        Route::get('/productionreportdisp', 'DashboardController@monthlyProductionReportView')->name('productionreportdisp');
+        Route::get('/inspectionreportdisp', 'DashboardController@monthlyMonitoringReportView')->name('inspectionreportdisp');
 
-    // -------- Log out -------
-    Route::get('/logout', 'UserMgmtController@logOut')->name('logout');
+        Route::post('/productionreport', 'ReportController@monthlyProductionReport')->name('productionreport');
+        Route::post('/inspectionreport', 'ReportController@monthlyMonitoringReport')->name('inspectionreport');
 
-
+        // -------- Log out -------
+        Route::get('/logout', 'UserMgmtController@logOut')->name('logout');
+    });
 }); // .'middleware' => ['auth']
 
 

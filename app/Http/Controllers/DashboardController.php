@@ -65,19 +65,9 @@ class DashboardController extends Controller
         }
     }
 
-
-
-    /**
-     * Change Language Locale when flag icon is clicked
-     */
-//    public function changeLanguage(Request $request)
-//    {
-//        echo App::getLocale();
-//        $a = Session::put('locale', $request->flag_icon);
-//        $b = App::setLocale($request->flag_icon);
-//        dd($b);
-//
-//        return Redirect::back();
-//    }
+    // return to login if URL=localhost/
+    public function gotoLogin(){
+        return Redirect::route('login');
+    }
 
 }
