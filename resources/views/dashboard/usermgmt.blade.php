@@ -145,7 +145,7 @@
                     <div class="clearfix"></div>
 
                     <div class="form-group" id="div_select_facility">
-                        <label for="facility-option" class="col-md-6">{{ trans('allstr.facility') }}</label>
+                        <label for="facility-option" class="col-md-6">{{ trans('allstr.facility_name') }}</label>
                         <div class="col-md-6 styled-select">
                             <select id="facility_selected" autocomplete='off'>
                                 <option value="0" selected>{{ trans('allstr.select_facility_option') }}</option>

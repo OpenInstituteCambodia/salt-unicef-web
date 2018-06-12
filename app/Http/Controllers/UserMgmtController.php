@@ -86,7 +86,7 @@ class UserMgmtController extends Controller
                 $facility_option = $facility_option . "<option value='". $each_facility->id . "'>" . $each_facility->facility_name . "</option>";
             }
             $facility_options = "<label for='facility_option_edit' class='col-md-6'>"
-                                        . trans('allstr.facility')
+                                        . trans('allstr.facility_name')
                                     . "</label>"
                                     . "<div class='col-md-6'>"
                                         . "<select id='facility_selected_edit'>"
@@ -177,7 +177,7 @@ class UserMgmtController extends Controller
             $faci_option = $faci_option . "<option value='". $each_faci->id . "'>" . $each_faci->facility_name . "</option>";
         }
         $new_select_data = "<label for='facility_option_edit' class='col-md-6'>"
-                                . trans('allstr.facility')
+                                . trans('allstr.facility_name')
                             . "</label>"
                             . "<div class='col-md-6'>"
                                 . "<select id='facility_selected_edit'>"
