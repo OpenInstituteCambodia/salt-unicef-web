@@ -5,6 +5,8 @@
         <!--To show white background over the gray background-->
         <div class="blank-page">
             <!-- show report form --->
+            <h3 align="center"><strong>{{ trans('allstr.producing_report')}}</strong></h3><hr>
+            <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-6">
                     <label for="startdatepicker">{{ trans('allstr.start_date') }}</label>

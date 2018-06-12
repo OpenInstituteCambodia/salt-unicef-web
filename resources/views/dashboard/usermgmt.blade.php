@@ -3,16 +3,18 @@
     <div class="blank">
         <!--To show white background over the gray background-->
         <div class="blank-page">
+            <h3 align="center"><strong>{{ trans('allstr.user_mgmt')}}</strong></h3><hr>
+            <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-outline-primary" id="add_new_user_trigger">
+                    <button class="btn btn-outline-primary pull-right" id="add_new_user_trigger">
                         <i class="fa fa-plus fa-lg" aria-hidden="true"></i>
                         {{ trans('allstr.add_user') }}
                     </button>
-                    <hr>
                     <div class="clearfix"></div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
