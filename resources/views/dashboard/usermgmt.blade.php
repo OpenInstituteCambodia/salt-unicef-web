@@ -156,7 +156,6 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
-
                 </div><!-- /.modal-body -->
                 <div class='modal-footer'>
                     <button class='btn btn-outline-danger' data-dismiss='modal' id="add_new_user_cancel">
@@ -399,6 +398,19 @@
                     }
                 });
 
+                $(document).on('change', "#role_selected_edit", function(){
+                    //$("#role_selected").change(function(){
+                    if($(this).val() == 2){
+                        $("#div_existing_facility_edit").show();
+                    }
+                    else{
+                        // reset selected option
+                        $('#facility_selected_edit').prop('selectedIndex',0);
+                        // hide facility div
+                        $("#div_existing_facility_edit").hide();
+                    }
+                });
+
                 /* Show Add New User Modal */
                 $(document).on('click', "#add_new_user_trigger", function(){
                 //$("#add_new_user_trigger").click(function(){
@@ -427,6 +439,13 @@
                         $('#option_msg').html("");
                     }
                 });
+
+//                $(document).on('change', "#role_selected_edit", function(){
+//                    var roleOption_selected = $('#role_selected_edit').val();
+//                    if(roleOption_selected !=0) {
+//                        $('#option_msg_edit').html("");
+//                    }
+//                });
 
                 /* Save New User */
                 $(document).on('click', "#add_new_user_save", function(){

@@ -18,7 +18,6 @@ class UserMgmtController extends Controller
      */
     public function addNewUser(Request $request)
     {
-        logger('AA');
         CustomHelper::save_new_user($request->name, $request->email, $request->pwd, $request->role, $request->facil);
         // return view('dashboard/monthlyreport');
         // return view('dashboard/facilitymgmt',['all_facilities' => $fac_result]);
@@ -140,6 +139,7 @@ class UserMgmtController extends Controller
                                 . "</select>"
                             . "</div>"
                         . "</div>"
+                        // . "<div id='option_msg_edit'></div>"
                         . "<div class='clearfix'></div>"
 
                         . "<div class='form-group' id='div_existing_facility_edit'>"
@@ -158,7 +158,6 @@ class UserMgmtController extends Controller
                                 . trans('allstr.save')
                         ."</button>"
                     . "</div>"
-
 //                    . "<script src='" . URL::asset('vendors/custom/custom.js') . "'></script>"
                 ;
         return $user_data;
