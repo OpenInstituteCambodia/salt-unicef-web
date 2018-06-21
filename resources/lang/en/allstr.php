@@ -88,6 +88,7 @@ return [
     'required_password' => 'Password is required',
     'incorrect_email' => 'Incorrect Email format',
     'required_email' => 'Email is required',
+    'mobile_app' => 'Mobile Apps',
 
 
 ];

@@ -5,7 +5,9 @@
     width: 100%;
     background-color: #FFFFFF;
     text-align: center;
-    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-right: 10px;
 }
 
 .input-group-addon, .input-group-btn {

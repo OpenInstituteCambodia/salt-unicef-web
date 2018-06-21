@@ -94,4 +94,21 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="pull-left">
+                <h4><strong> {{ trans('allstr.mobile_app') }} </strong></h4>
+            </div>
+            <div class="pull-right">
+                <a href="https://itunes.apple.com/us/app/salt-cambodia/id1400726630?ls=1&mt=8" target="_blank">
+                    <img src="/appstore.png">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.unicef.saltapp" target="_blank">
+                    <img src="/playstore.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
